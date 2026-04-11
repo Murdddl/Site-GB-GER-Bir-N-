@@ -19,7 +19,7 @@
             <form method="POST">
                 {% csrf_token %}
                 <input type="text" name="name" placeholder="Ihr Name (optional)" class="form-control">
-                <textarea name="text" placeholder="Ihr Review" class="form-control" rows="4" required></textarea>
+                <textarea name="text" placeholder="Ihre Bewertung" class="form-control" rows="4" oninvalid="this.setCustomValidity('Bitte füllen Sie dieses Feld aus')" oninput="this.setCustomValidity('')" required></textarea>
                 <button type="submit" class="btn btn-download">Absenden</button>
             </form>
         </div>

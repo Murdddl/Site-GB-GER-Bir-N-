@@ -10,7 +10,7 @@ def index(request):
         form = SignatureForm(request.POST)
         if form.is_valid():
             Signature.objects.create(
-                name=form.cleaned_data['name'] or 'Аноним',
+                name=form.cleaned_data['name'] or 'Anonym',
                 signed=True
             )
             return redirect('index')
@@ -38,7 +38,7 @@ def reviews(request):
 
 def reviews(request):
     if request.method == 'POST':
-        name = request.POST.get('name') or 'Аноним'
+        name = request.POST.get('name') or 'Anonym'
         text = request.POST.get('text')
         if text:
             Review.objects.create(name=name, text=text)
