@@ -6,31 +6,41 @@ import os
 from django.conf import settings
 
 def index(request):
+    already_signed = False
+    ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
+    
     if request.method == 'POST':
-        form = SignatureForm(request.POST)
-        if form.is_valid():
-            Signature.objects.create(
-                name=form.cleaned_data['name'] or 'Anonym',
-                signed=True
-            )
-            return redirect('index')
+        if Signature.objects.filter(ip_address=ip).exists():
+            already_signed = True
+        else:
+            form = SignatureForm(request.POST)
+            if form.is_valid():
+                Signature.objects.create(
+                    name=form.cleaned_data['name'] or 'Аноним',
+                    signed=True,
+                    ip_address=ip
+                )
+                return redirect('index')
     else:
         form = SignatureForm()
-    
-    count = Signature.objects.count()
 
-    file_path = os.path.join(settings.MEDIA_ROOT, 'petition.pdf')  # замени на имя своего файла
+    count = Signature.objects.count()
+    already_signed = Signature.objects.filter(ip_address=ip).exists()
+
+    # размер файла
+    file_path = os.path.join(settings.MEDIA_ROOT, 'Appell.pdf')
     if os.path.exists(file_path):
         size_bytes = os.path.getsize(file_path)
         size_mb = round(size_bytes / (1024 * 1024), 1)
-        file_size = f"{size_mb} MB"
+        file_size = f"{size_mb} МБ"
     else:
         file_size = "—"
 
     return render(request, 'index.html', {
         'form': form,
         'count': count,
-        'file_size': file_size
+        'file_size': file_size,
+        'already_signed': already_signed
     })
 
 def reviews(request):

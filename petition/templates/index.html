@@ -40,17 +40,27 @@
         </div>
 
         <div class="sign-block">
+
     <p class="sign-description">
         Unten können Sie eine elektronische Unterschrift hinterlassen, 
         um die Aufmerksamkeit von der Kreisverwaltung Birkenfeld zu gewinnen. 
         Jede Unterschrift wird gezählt und leistet einen großen Beitrag.
     </p>
+
     <p class="sign-count">Anzahl der Unterschriften: {{ count }}</p>
+            {% if already_signed %}
+    <p class="sign-description">Sie haben bereits unterschrieben. Vielen Dank!</p>
+            
+            {% else %}
+
     <form method="POST">
         {% csrf_token %}
         {{ form.name }}
         <button type="submit" class="btn btn-download">Unterschreiben</button>
     </form>
+    
+            {% endif %}
+
         </div>
 
         <div class="reviews-link">
