@@ -121,3 +121,6 @@ def answer_question(request, question_id):
         q.status = request.POST.get('action', 'pending')
         q.save()
     return redirect('moderation')
+
+def donate(request):
+    return render(request, 'donate.html')
