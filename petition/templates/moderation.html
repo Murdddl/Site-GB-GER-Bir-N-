@@ -34,9 +34,10 @@
             {% endfor %}
         </div>
 
-        <div class="reviews-link">
-            <a href="{% url 'logout' %}" class="btn btn-view">Ausloggen</a>
-        </div>
+        <form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-view">Ausloggen</button>
+        </form>
 
     </main>
 </body>
