@@ -13,7 +13,41 @@
 
         <h1 class="title">Moderation</h1>
 
+        <!-- Добавить свой вопрос -->
+        <div class="review-form-block">
+            <h2 class="review-form-title">Frage hinzufügen</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="new_question" value="1">
+                <input type="text" name="question" placeholder="Frage" class="form-control" required>
+                <textarea name="answer" placeholder="Antwort" class="form-control" rows="3" required></textarea>
+                <button type="submit" class="btn btn-download">Hinzufügen</button>
+            </form>
+        </div>
+
+        <!-- Мои вопросы -->
         <div class="reviews-list">
+            <h2 class="review-form-title">Meine Fragen</h2>
+            {% for q in my_questions %}
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="review-name">{{ q.question }}</span>
+                    <span class="review-date">{{ q.date|date:"d.m.Y" }}</span>
+                </div>
+                <p class="review-text">{{ q.answer }}</p>
+                <form method="POST" action="{% url 'delete_question' q.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-view" style="margin-top: 10px;">Löschen</button>
+                </form>
+            </div>
+            {% empty %}
+            <p class="no-reviews">Noch keine Fragen hinzugefügt.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Вопросы на модерации -->
+        <div class="reviews-list">
+            <h2 class="review-form-title">Zur Moderation</h2>
             {% for q in questions %}
             <div class="review-card">
                 <div class="review-header">
@@ -34,10 +68,12 @@
             {% endfor %}
         </div>
 
-        <form method="POST" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-view">Ausloggen</button>
-        </form>
+        <div class="reviews-link">
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-view">Ausloggen</button>
+            </form>
+        </div>
 
     </main>
 </body>

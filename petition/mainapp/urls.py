@@ -11,4 +11,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
     path('moderation/', views.moderation, name='moderation'),
     path('moderation/<int:question_id>/', views.answer_question, name='answer_question'),
+    path('moderation/delete/<int:question_id>/', views.delete_question, name='delete_question'),
 ]
