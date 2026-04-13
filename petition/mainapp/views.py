@@ -69,9 +69,19 @@ def all_reviews(request):
 
 def faq(request):
     if request.method == 'POST':
+        ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
+        already_asked = Question.objects.filter(ip_address=ip, status='pending').exists()
+        
+        if already_asked:
+            questions = Question.objects.filter(status='approved').order_by('-date')
+            return render(request, 'faq.html', {
+                'questions': questions,
+                'already_asked': True
+            })
+        
         question = request.POST.get('question')
         if question:
-            Question.objects.create(question=question)
+            Question.objects.create(question=question, ip_address=ip)
             return redirect('faq')
     
     questions = Question.objects.filter(status='approved').order_by('-date')
