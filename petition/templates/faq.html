@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>FAQ</title>
+</head>
+<body>
+    <main class="container">
+
+        <h1 class="title">Fragen & Antworten</h1>
+
+        <div class="reviews-list">
+            {% for q in questions %}
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="review-name">{{ q.question }}</span>
+                    <span class="review-date">{{ q.date|date:"d.m.Y" }}</span>
+                </div>
+                <p class="review-text">{{ q.answer }}</p>
+            </div>
+            {% empty %}
+            <p class="no-reviews">Noch keine Fragen vorhanden.</p>
+            {% endfor %}
+        </div>
+
+        <div class="review-form-block">
+            <h2 class="review-form-title">Frage stellen</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <textarea name="question" placeholder="Ihre Frage" class="form-control" rows="3"
+                    oninvalid="this.setCustomValidity('Bitte füllen Sie dieses Feld aus')"
+                    oninput="this.setCustomValidity('')" required></textarea>
+                <button type="submit" class="btn btn-download">Absenden</button>
+            </form>
+        </div>
+
+        <div class="reviews-link">
+            <a href="{% url 'index' %}" class="btn btn-view">← Zurück</a>
+        </div>
+
+    </main>
+</body>
+</html> 

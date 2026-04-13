@@ -4,6 +4,8 @@ from .forms import SignatureForm
 from .models import Signature, Review
 import os
 from django.conf import settings
+from .models import Signature, Review, Question
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     already_signed = False
@@ -64,3 +66,27 @@ def reviews(request):
 def all_reviews(request):
     reviews = Review.objects.order_by('-date')
     return render(request, 'all_reviews.html', {'reviews': reviews})
+
+def faq(request):
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        if question:
+            Question.objects.create(question=question)
+            return redirect('faq')
+    
+    questions = Question.objects.filter(status='approved').order_by('-date')
+    return render(request, 'faq.html', {'questions': questions})
+
+@login_required
+def moderation(request):
+    questions = Question.objects.filter(status='pending').order_by('date')
+    return render(request, 'moderation.html', {'questions': questions})
+
+@login_required
+def answer_question(request, question_id):
+    if request.method == 'POST':
+        q = Question.objects.get(id=question_id)
+        q.answer = request.POST.get('answer', '')
+        q.status = request.POST.get('action', 'pending')
+        q.save()
+    return redirect('moderation')
