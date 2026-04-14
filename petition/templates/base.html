@@ -8,7 +8,35 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>{% block title %}Seite{% endblock %}</title>
 </head>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    // Применяем тему при загрузке
+    window.addEventListener('DOMContentLoaded', () => {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+            document.body.classList.add('dark');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+    });
+</script>
+
 <body>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="{% url 'index' %}" class="nav-link">Hauptseite</a>
+            <a href="{% url 'faq' %}" class="nav-link">FAQ</a>
+            <a href="{% url 'reviews' %}" class="nav-link">Bewertungen</a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </nav>
 
     <main class="container">
         {% block content %}{% endblock %}
