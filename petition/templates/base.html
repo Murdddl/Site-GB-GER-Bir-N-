@@ -53,7 +53,7 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'moderation' %}" class="nav-btn nav-admin" style='font-weight: bold;'>Mod FAQ</a>
                     <a href="{% url 'moderation_rev' %}" class="nav-btn nav-admin" style='font-weight: bold;'>Mod Rev</a>
-                    <a href="{% url 'logout' %}" class="nav-btn" style="opacity: 0.6;">Logout</a>
+                    <a href="{% url 'logout' %}" class="nav-btn nav-theme" style="opacity: 0.6;">Logout</a>
                 {% endif %}
 
                 {% if request.resolver_match.url_name != 'index' %}

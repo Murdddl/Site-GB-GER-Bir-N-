@@ -149,6 +149,10 @@ body {
     background-color: #ff6000e3;
 }
 
+.nav-theme:hover {
+    background-color: #adadad;
+}
+
 /* --- ТЕМНАЯ ТЕМА (ПОЛНАЯ КОРРЕКЦИЯ) --- */
 body.dark {
     background-color: #121212 !important;
