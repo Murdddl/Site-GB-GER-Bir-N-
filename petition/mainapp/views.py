@@ -106,25 +106,25 @@ def faq(request):
         'already_asked': already_asked
     })
 
-@login_required
-def moderation(request):
-    if request.method == 'POST' and 'new_question' in request.POST:
-        question = request.POST.get('question')
-        answer = request.POST.get('answer')
-        if question and answer:
-            Question.objects.create(
-                question=question,
-                answer=answer,
-                status='approved'
-            )
-            return redirect('moderation')
-
-    pending = Question.objects.filter(status='pending').order_by('date')
-    my_questions = Question.objects.filter(status='approved').order_by('-date')
-    return render(request, 'moderation.html', {
-        'questions': pending,
-        'my_questions': my_questions
-    })
+#@login_required
+#def moderation(request):
+#    if request.method == 'POST' and 'new_question' in request.POST:
+#        question = request.POST.get('question')
+#        answer = request.POST.get('answer')
+#        if question and answer:
+#            Question.objects.create(
+#                question=question,
+#                answer=answer,
+#                status='approved'
+#            )
+#            return redirect('moderation')
+#
+#    pending = Question.objects.filter(status='pending').order_by('date')
+#    my_questions = Question.objects.filter(status='approved').order_by('-date')
+#    return render(request, 'moderation.html', {
+#        'questions': pending,
+#        'my_questions': my_questions
+#    })
 
 @login_required
 def delete_question(request, question_id):
