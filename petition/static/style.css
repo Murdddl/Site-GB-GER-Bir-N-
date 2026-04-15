@@ -61,6 +61,7 @@ body {
     justify-content: center;
 }
 
+/* Кнопки навигации */
 .nav-links a, .nav-btn {
     text-decoration: none !important;
     color: #1a1a1a;
@@ -76,6 +77,19 @@ body {
 .nav-links a:hover {
     background-color: #1a1a1a;
     color: #fff !important;
+}
+
+/* --- Основные кнопки сайта (Скачать, Подписать и т.д.) --- */
+.btn-download {
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+    border: 1px solid #1a1a1a !important;
+}
+
+.btn-view {
+    background-color: #f0f0f0 !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
 }
 
 /* --- КОНТЕЙНЕРЫ И КАРТОЧКИ (ОРИГИНАЛ) --- */
@@ -109,6 +123,24 @@ body {
     border: 1px solid #ddd;
     border-radius: 6px;
     margin-top: 5px;
+}
+
+/* Кнопки навигации */
+.nav-btn, .nav-links a {
+    text-decoration: none !important;
+    color: #1a1a1a !important;
+    font-weight: 600;
+    padding: 6px 14px;
+    border: 2px solid #1a1a1a !important;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.nav-links a:hover {
+    background-color: #1a1a1a !important;
+    color: #fff !important;
 }
 
 /* --- ТЕМНАЯ ТЕМА (ПОЛНАЯ КОРРЕКЦИЯ) --- */
