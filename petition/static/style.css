@@ -62,6 +62,11 @@ body {
 }
 
 /* Кнопки навигации */
+
+.btn:hover {
+    background-color: #cccccc;
+}
+
 .nav-links a, .nav-btn {
     text-decoration: none !important;
     color: #1a1a1a;
