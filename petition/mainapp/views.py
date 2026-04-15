@@ -156,3 +156,23 @@ def moderation(request):
     }
     
     return render(request, 'moderation.html', context)
+
+@login_required
+def moderation_rev(request):
+    # Берем только те отзывы, которые ждут проверки
+    pending_reviews = Review.objects.filter(status='pending').order_by('-date')
+    
+    if request.method == 'POST':
+        review_id = request.POST.get('review_id')
+        action = request.POST.get('action')
+        review = get_object_or_404(Review, id=review_id)
+        
+        if action == 'approve':
+            review.status = 'approved'
+            review.save()
+        elif action == 'delete':
+            review.delete()
+            
+        return redirect('moderation_rev')
+
+    return render(request, 'moderation_rev.html', {'reviews': pending_reviews})

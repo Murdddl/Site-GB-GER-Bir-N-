@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Модерация отзывов{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <h1 class="title">Модерация отзывов</h1>
+    
+    <div class="mb-4 text-center">
+        <a href="{% url 'moderation' %}" class="btn btn-view" style="font-size: 0.8rem;">← К вопросам FAQ</a>
+    </div>
+
+    <div class="reviews-list">
+        {% for r in reviews %}
+        <div class="review-card" data-aos="fade-up">
+            <div class="review-header">
+                <span class="review-name">Автор: {{ r.name }}</span>
+                <span class="review-date">{{ r.date|date:"d.m.Y H:i" }}</span>
+            </div>
+            <p class="review-text">{{ r.text }}</p>
+            
+            <form method="POST" class="mt-3 d-flex gap-2">
+                {% csrf_token %}
+                <input type="hidden" name="review_id" value="{{ r.id }}">
+                <button type="submit" name="action" value="approve" class="btn btn-download" style="background: #28a745; border-color: #28a745;">Опубликовать</button>
+                <button type="submit" name="action" value="delete" class="btn btn-view" style="border-color: #dc3545; color: #dc3545;">Удалить</button>
+            </form>
+        </div>
+        {% empty %}
+        <div class="text-center mt-5">
+            <p class="no-reviews">Все отзывы проверены. Чисто! ✨</p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock %}
