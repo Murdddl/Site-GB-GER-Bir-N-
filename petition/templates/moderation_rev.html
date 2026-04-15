@@ -24,8 +24,8 @@
                     {% csrf_token %}
                 <input type="hidden" name="review_id" value="{{ r.id }}"> 
     
-                <button type="submit" name="action" value="approve">Одобрить</button>
-                <button type="submit" name="action" value="delete">Удалить</button>
+                <button type="submit" name="action" value="approve" class="btn btn-download">Одобрить</button>
+                <button type="submit" name="action" value="delete" class="btn btn-view">Удалить</button>
             </form>
         </div>
         {% empty %}
