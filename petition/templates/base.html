@@ -55,9 +55,7 @@
                     <a href="{% url 'moderation_rev' %}" class="nav-btn nav-admin" style='font-weight: bold;'>Mod Rev</a>
                     <form action="{% url 'logout' %}" method="post" style="display:inline;">
                 {% csrf_token %}
-                    <button type="submit" class="nav-btn nav-theme" style="opacity: 0.6;">
-                        Logout
-                    </button>
+                    <button type="submit" class="nav-btn nav-theme" style="opacity: 0.6;">Logout</button>
                     </form>
                 {% endif %}
 
