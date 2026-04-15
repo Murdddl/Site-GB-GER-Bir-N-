@@ -37,8 +37,8 @@
 </script>
 
 <body>
+    <nav class="nav-links">
     <span style="color: red;">User: {{ user.username }} | Auth: {{ user.is_authenticated }}</span>
-    <div class="nav-links">
     <a href="{% url 'index' %}" class="nav-btn">Hauptseite</a>
     <a href="{% url 'faq' %}" class="nav-btn">FAQ</a>
     <a href="{% url 'reviews' %}" class="nav-btn">Reviews</a>
@@ -54,7 +54,7 @@
     {% endif %}
 
     <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-</div>
+    </nav>
 
     <main class="container">
         {% block content %}{% endblock %}
