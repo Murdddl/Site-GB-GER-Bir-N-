@@ -20,11 +20,12 @@
             </div>
             <p class="review-text">{{ r.text }}</p>
             
-            <form method="POST" class="mt-3 d-flex gap-2">
-                {% csrf_token %}
-                <input type="hidden" name="review_id" value="{{ r.id }}">
-                <button type="submit" name="action" value="approve" class="btn btn-download" style="background: #28a745; border-color: #28a745;">Опубликовать</button>
-                <button type="submit" name="action" value="delete" class="btn btn-view" style="border-color: #dc3545; color: #dc3545;">Удалить</button>
+            <form method="POST">
+                    {% csrf_token %}
+                <input type="hidden" name="review_id" value="{{ r.id }}"> 
+    
+                <button type="submit" name="action" value="approve">Одобрить</button>
+                <button type="submit" name="action" value="delete">Удалить</button>
             </form>
         </div>
         {% empty %}

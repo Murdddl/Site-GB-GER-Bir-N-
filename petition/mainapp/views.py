@@ -160,12 +160,13 @@ def moderation(request):
 
 @login_required
 def moderation_rev(request):
-    # Берем только те отзывы, которые ждут проверки
     pending_reviews = Review.objects.filter(status='pending').order_by('-date')
     
     if request.method == 'POST':
         review_id = request.POST.get('review_id')
         action = request.POST.get('action')
+        
+        # Если здесь ошибка, проверьте, что в модели Review есть поле 'status'
         review = get_object_or_404(Review, id=review_id)
         
         if action == 'approve':
