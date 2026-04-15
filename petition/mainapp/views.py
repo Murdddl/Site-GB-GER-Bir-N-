@@ -84,41 +84,27 @@ def all_reviews(request):
     return render(request, 'all_reviews.html', {'page_obj': page_obj})
 
 def faq(request):
-    query = request.GET.get('q')
-    # 3. Поиск по FAQ
-    if query:
-        questions = Question.objects.filter(
-            Q(question__icontains=query) | Q(answer__icontains=query),
-            status='approved'
-        ).order_by('-date')
-    else:
-        questions = Question.objects.filter(status='approved').order_by('-date')
+    ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
+    if ip and ',' in ip:
+        ip = ip.split(',')[0].strip()
 
+    already_asked = False
     if request.method == 'POST':
-        ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
         already_asked = Question.objects.filter(ip_address=ip, status='pending').exists()
-        
-        if already_asked:
-            return render(request, 'faq.html', {
-                'questions': questions,
-                'already_asked': True
-            })
-        
-        question_text = request.POST.get('question')
-        if question_text:
-            Question.objects.create(question=question_text, ip_address=ip)
-            
-            # Email уведомление админу о новом вопросе
-            send_mail(
-                'Новый вопрос в FAQ',
-                f'Поступил новый вопрос: {question_text}',
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.ADMIN_EMAIL],
-                fail_silently=True,
-            )
-            return redirect('faq')
+        if not already_asked:
+            question = request.POST.get('question')
+            if question:
+                Question.objects.create(question=question, ip_address=ip)
+                return redirect('faq')
     
-    return render(request, 'faq.html', {'questions': questions, 'query': query})
+    # Важно: эта переменная должна быть определена ДО рендера
+    already_asked = Question.objects.filter(ip_address=ip, status='pending').exists()
+    questions = Question.objects.filter(status='approved').order_by('-date')
+    
+    return render(request, 'faq.html', {
+        'questions': questions, 
+        'already_asked': already_asked
+    })
 
 @login_required
 def moderation(request):

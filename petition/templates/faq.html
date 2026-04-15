@@ -1,19 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Fragen und Antworten{% endblock %}
+{% load static %}
+
+{% block title %}FAQ - Вопросы и ответы{% endblock %}
 
 {% block content %}
 <main class="container">
     <h1 class="title">Fragen & Antworten</h1>
-
-    <div class="search-block">
-        <form method="GET" action="{% url 'faq' %}" class="search-form">
-            <input type="text" name="q" placeholder="Suche in FAQ..." value="{{ query|default:'' }}" class="form-control">
-            <button type="submit" class="btn btn-view">Suchen</button>
-            {% if query %}
-                <a href="{% url 'faq' %}" class="btn-clear">Löschen</a>
-            {% endif %}
-        </form>
-    </div>
 
     <div class="reviews-list">
         {% for q in questions %}
@@ -25,21 +17,25 @@
             <p class="review-text">{{ q.answer }}</p>
         </div>
         {% empty %}
-        <p class="no-reviews">Ничего не найдено по вашему запросу.</p>
+        <p class="no-reviews">Noch keine Fragen vorhanden.</p>
         {% endfor %}
     </div>
-    ```
 
----
+    <div class="review-form-block">
+        <h2 class="review-form-title">Frage stellen</h2>
+        {% if already_asked %}
+            <p class="sign-description">Sie haben bereits eine Frage gestellt. Bitte warten Sie auf die Antwort.</p>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                <textarea name="question" placeholder="Ihre Frage" class="form-control" rows="3" required></textarea>
+                <button type="submit" class="btn btn-download">Absenden</button>
+            </form>
+        {% endif %}
+    </div>
 
-### 3. Изменения в `base.html` (Навигация, SEO, Анимации)
-Этот файл находится в папке `templates/`. Вам нужно отредактировать секцию `<head>` и начало `<body>`.
-
-**В `<head>` для SEO:**
-```html
-<meta name="description" content="Подпишите петицию за ремонт школы. Каждое имя имеет значение!">
-<meta property="og:title" content="Ремонт школы — поддержите инициативу">
-<meta property="og:type" content="website">
-<meta property="og:image" content="{% static 'img/og-preview.jpg' %}">
-
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <div class="reviews-link">
+        <a href="{% url 'index' %}" class="btn btn-view">← Zurück</a>
+    </div>
+</main>
+{% endblock %}
