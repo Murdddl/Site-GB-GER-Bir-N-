@@ -226,36 +226,63 @@ body {
     text-align: center;
 }
 
-.navbar {
-    position: fixed;
+/* Основной контейнер навигации */
+.top-nav {
+    background-color: #ffffff; /* Цвет фона (белый для светлой темы) */
+    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
+    position: sticky; /* Панель будет прилипать к верху при скролле */
     top: 0;
     left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    padding: 12px 24px;
-    background-color: #fff;
-    border-bottom: 1px solid #e0e0e0;
     z-index: 1000;
+    padding: 10px 0;
 }
 
-.nav-links {
+/* Обертка для центрирования контента внутри навигации */
+.nav-wrapper {
     display: flex;
-    gap: 20px;
+    justify-content: space-between; /* Лого слева, ссылки справа */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.nav-link {
+/* Стили для логотипа */
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
     text-decoration: none;
     color: #1a1a1a;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: opacity 0.2s;
 }
 
-.nav-link:hover {
-    opacity: 0.6;
+/* Контейнер для ссылок */
+.nav-links {
+    display: flex;
+    gap: 20px; /* Расстояние между ссылками */
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #007bff; /* Цвет при наведении */
+}
+
+/* Стили для темной темы */
+body.dark .top-nav {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+body.dark .logo, 
+body.dark .nav-links a {
+    color: #ffffff;
 }
 
 .theme-toggle {
