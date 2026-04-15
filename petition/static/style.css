@@ -226,41 +226,83 @@ body {
     text-align: center;
 }
 
-/* Навигационная панель */
+/* Обнуляем базовые отступы, чтобы хидер прилегал плотно */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Добавляем отступ сверху, равный высоте хидера, чтобы контент не пропадал */
+    padding-top: 100px; 
+    font-family: Arial, sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Навигационная панель — фиксируем намертво поверх всего */
 .top-nav {
-    position: fixed;      /* Фиксируем наверху экрана */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;          /* Растягиваем на всю ширину */
-    background-color: #ffffff; 
-    z-index: 9999;        /* Гарантируем, что панель будет над всеми элементами */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Добавляем легкую тень для отделения от контента */
-    padding: 10px 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 10000; /* Максимальный приоритет слоя */
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1); /* Тень, чтобы отделять от контента */
+    padding: 15px 0;
 }
 
-/* Отступ для контента */
-body {
-    padding-top: 80px;    /* ВАЖНО: добавьте этот отступ, чтобы контент не "залезал" под фиксированный хидер */
-}
-
-/* Центрирование внутри хидера */
+/* Контейнер внутри навигации для выравнивания */
 .nav-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column; /* Элементы (лого и ссылки) будут друг под другом, как на скриншоте */
+    flex-direction: column; /* Лого над ссылками, как на вашем скриншоте */
     align-items: center;
-    justify-content: center;
+    gap: 10px;
 }
 
 .nav-links {
     display: flex;
-    gap: 15px;
-    margin-top: 10px;
+    gap: 20px;
+    align-items: center;
 }
 
-/* Для темной темы */
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Стили для кнопки переключения темы */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* ТЕМНАЯ ТЕМА */
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
 body.dark .top-nav {
     background-color: #1a1a1a;
     border-bottom: 1px solid #333;
+}
+
+body.dark .nav-links a,
+body.dark .logo {
+    color: #ffffff;
+}
+
+/* Исправление для плейсхолдеров в темной теме */
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+    color: #cccccc !important;
 }
 
 .theme-toggle {
