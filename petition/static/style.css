@@ -361,7 +361,7 @@ body.dark .progress-header {
     --text-color: #1a1a1a;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
     :root {
         --bg-color: #121212;
         --text-color: #e0e0e0;
