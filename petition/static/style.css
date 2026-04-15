@@ -355,3 +355,22 @@ body.dark .progress-header {
     color: #999;
 }
 
+:root {
+    --bg-color: #ffffff;
+    --text-color: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+    }
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+    .review-card {
+        background: #1e1e1e;
+        border: 1px solid #333;
+    }
+}
