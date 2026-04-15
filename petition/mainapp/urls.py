@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-
+print('aaaa')
 urlpatterns = [
     path('', views.index, name='index'),
     path('reviews/', views.reviews, name='reviews'),
