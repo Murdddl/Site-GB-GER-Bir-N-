@@ -274,15 +274,35 @@ body {
     text-decoration: none;
     color: #333;
     font-weight: 500;
+    padding: 6px 15px;      /* Внутренние отступы, чтобы была форма кнопки */
+    border: 1px solid #333; /* Тонкая обводка */
+    border-radius: 20px;    /* Скругление как у кнопок на скринах */
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    background-color: #333;
+    color: #fff !important;
+}
+
+body.dark .nav-links a {
+    color: #fff;
+    border-color: #fff;
+}
+
+body.dark .nav-links a:hover {
+    background-color: #fff;
+    color: #000 !important;
 }
 
 /* Кнопка смены темы */
 .theme-toggle {
-    background: none;
-    border: none;
+    background: none !important;
+    border: none !important;
     font-size: 1.4rem;
     cursor: pointer;
-    padding: 0;
+    padding: 0 10px !important;
     margin-left: 10px;
 }
 
@@ -464,6 +484,12 @@ body.dark .file-display-name,
 body.dark [class*="file"] {
     color: #ffffff;
 }
+
 body.dark .review-form-title {
     color: #ffffff !important
+}
+
+.nav-links a[href*="moderation"] {
+    border-color: #ffc107;
+    color: #ffc107;
 }
