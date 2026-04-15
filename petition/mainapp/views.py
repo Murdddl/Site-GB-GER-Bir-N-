@@ -63,7 +63,8 @@ def reviews(request):
                 [settings.ADMIN_EMAIL], # Добавьте это в settings.py
                 fail_silently=True,
             )
-            return redirect('reviews')
+            all_reviews = Review.objects.filter(status='approved').order_by('-date')
+            return render(request, 'reviews.html', {'reviews': all_reviews})
     
     latest_reviews = Review.objects.order_by('-date')[:10]
     total_count = Review.objects.count()
