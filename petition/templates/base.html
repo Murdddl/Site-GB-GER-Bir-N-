@@ -10,13 +10,6 @@
 </head>
 
 <script>
-    function toggleTheme() {
-        document.body.classList.toggle('dark');
-        const isDark = document.body.classList.contains('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
-    }
-
     // Применяем тему при загрузке
     window.addEventListener('DOMContentLoaded', () => {
         const theme = localStorage.getItem('theme');
@@ -54,14 +47,5 @@
         once: true     // Анимация срабатывает один раз при скролле
     });
 </script>
-<div class="nav-links">
-    <a href="{% url 'index' %}">Главная</a>
-    <a href="{% url 'faq' %}">FAQ</a>
-    {% if user.is_authenticated %}
-        <a href="{% url 'moderation' %}" style="color: #ffc107;">Модерация</a>
-        <a href="{% url 'logout' %}">Выход</a>
-    {% endif %}
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-</div>
 </body>
 </html>
