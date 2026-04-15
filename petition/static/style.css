@@ -444,3 +444,23 @@ body.dark input::-ms-input-placeholder,
 body.dark textarea::-ms-input-placeholder {
     color: #ffffff;
 }
+
+/* Цвет текста названия файла в темной теме */
+body.dark .review-name, 
+body.dark .review-text,
+body.dark .file-info span,
+body.dark .file-name {
+    color: #ffffff !important;
+}
+
+/* Если "petition.pdf" — это ссылка или внутри карточки .review-card */
+body.dark .review-card {
+    background-color: #242424 !important;
+    border-color: #333 !important;
+}
+
+/* Конкретно для текстовых узлов в блоке загрузки */
+body.dark .file-display-name,
+body.dark [class*="file"] {
+    color: #ffffff;
+}
