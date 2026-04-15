@@ -79,6 +79,12 @@ body {
     transition: all 0.2s;
 }
 
+.nav-links form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
 .nav-links a:hover {
     background-color: #1a1a1a;
     color: #fff !important;
@@ -148,6 +154,11 @@ body {
 .nav-links a:hover {
     background-color: #1a1a1a !important;
     color: #fff !important;
+}
+
+.nav-links button {
+    background: none;
+    cursor: pointer;
 }
 
 .nav-admin {
