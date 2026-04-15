@@ -1,29 +1,36 @@
-/* Глобальные настройки */
+/* --- 1. ГЛОБАЛЬНЫЕ СБРОСЫ И ОСНОВА --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* 1. Базовые настройки страницы */
-body {
-    min-height: 100vh;
-    background-color: #f5f5f5;
-    font-family: sans-serif;
-    display: block; /* Исправлено: убран flex, чтобы контент не центрировался вертикально */
-    padding-top: 160px !important; /* Отступ под фиксированный хидер */
-    margin: 0;
-    transition: background-color 0.3s ease, color 0.3s ease;
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: #1a1a1a;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
 }
 
-/* 2. Навигационная панель (Хидер) */
+body {
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: sans-serif;
+    line-height: 1.6;
+    display: block; /* Убран flex, ломавший позиционирование */
+    padding-top: 160px !important; /* Отступ, чтобы контент не заезжал под хидер */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- 2. НАВИГАЦИЯ (ХИДЕР) --- */
 .top-nav {
     position: fixed !important;
     top: 0;
     left: 0;
     width: 100%;
     background-color: #ffffff;
-    z-index: 1000;
+    z-index: 999999 !important;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     padding: 15px 0;
 }
@@ -34,7 +41,15 @@ body {
     display: flex;
     flex-direction: column; 
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    text-decoration: none;
+    margin-bottom: 10px;
 }
 
 .nav-links {
@@ -45,17 +60,17 @@ body {
     justify-content: center;
 }
 
-/* Кнопки навигации */
-.nav-btn, .nav-links a {
+.nav-links a {
     text-decoration: none;
     color: #1a1a1a;
     font-weight: 600;
-    padding: 8px 16px;
+    padding: 8px 20px;
     border: 2px solid #1a1a1a;
     border-radius: 4px;
-    font-size: 0.85rem;
     text-transform: uppercase;
-    transition: all 0.2s ease;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease-in-out;
 }
 
 .nav-links a:hover {
@@ -63,44 +78,123 @@ body {
     color: #ffffff !important;
 }
 
-/* Специальный стиль для кнопок модерации */
+/* Специальные кнопки модерации */
 .nav-links a[href*="moderation"] {
     border-color: #ffc107;
     color: #ffc107;
 }
 
-/* 3. Основной контейнер */
+.nav-links a[href*="moderation"]:hover {
+    background-color: #ffc107;
+    color: #000 !important;
+}
+
+/* --- 3. КОНТЕЙНЕР И ТИПОГРАФИКА --- */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
+    text-align: center;
+    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px;
 }
 
 .title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: #1a1a1a;
-    margin-bottom: 10px;
 }
 
-/* Карточки контента */
+.description {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* --- 4. КАРТОЧКИ И БЛОКИ (Файлы, Подписи, Отзывы) --- */
 .file-card, .sign-block, .review-card, .review-form-block {
+    display: flex;
     width: 100%;
     padding: 20px;
     background-color: #fff;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     text-align: left;
 }
 
-/* 4. Темная тема (Объединенная и очищенная) */
+.file-card {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sign-block, .review-form-block, .review-card {
+    flex-direction: column;
+    gap: 12px;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.file-icon { font-size: 1.8rem; }
+
+.file-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.file-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.file-size {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* --- 5. ФОРМЫ И КНОПКИ --- */
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.form-control:focus { border-color: #1a1a1a; }
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-view { background-color: #f0f0f0; color: #333; }
+.btn-download { background-color: #1a1a1a; color: #fff; }
+
+/* --- 6. ПРОГРЕСС-БАР --- */
+.progress-block { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+.progress-header { display: flex; justify-content: space-between; font-size: 0.85rem; color: #666; }
+.progress-bar-bg { width: 100%; height: 8px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background-color: #1a1a1a; border-radius: 10px; transition: width 0.5s ease; }
+
+/* --- 7. ТЕМНАЯ ТЕМА --- */
 body.dark {
     background-color: #121212 !important;
-    color: #f5f5f5 !important;
+    color: #ffffff !important;
 }
 
 body.dark .top-nav {
@@ -112,30 +206,36 @@ body.dark .file-card,
 body.dark .sign-block, 
 body.dark .review-card, 
 body.dark .review-form-block {
-    background-color: #1e1e1e !important;
+    background-color: #242424 !important;
     border-color: #333 !important;
 }
 
-body.dark .nav-links a, body.dark .logo, body.dark .title, body.dark .review-name {
+body.dark .logo, 
+body.dark .title, 
+body.dark .file-name, 
+body.dark .review-name, 
+body.dark .review-text,
+body.dark .nav-links a {
     color: #ffffff !important;
     border-color: #ffffff;
 }
 
-body.dark input, body.dark textarea {
-    background-color: #2d2d2d !important;
-    border-color: #444 !important;
-    color: #ffffff !important;
+body.dark .form-control {
+    background-color: #333;
+    border-color: #444;
+    color: #fff;
 }
 
-body.dark input::placeholder, body.dark textarea::placeholder {
-    color: #888 !important;
-}
+body.dark .progress-bar-bg { background-color: #333; }
+body.dark .progress-bar-fill { background-color: #f5f5f5; }
 
-/* Кнопка смены темы */
+/* Смена темы (кнопка) */
 .theme-toggle {
     background: none;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 6px 10px;
     cursor: pointer;
     font-size: 1.2rem;
-    padding: 5px;
+    transition: opacity 0.2s;
 }
