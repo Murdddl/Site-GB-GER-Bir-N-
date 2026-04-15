@@ -1,31 +1,37 @@
-/* --- ГЛОБАЛЬНЫЕ СТИЛИ --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* --- ГЛОБАЛЬНЫЕ СТИЛИ (ОРИГИНАЛ) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     min-height: 100vh;
     background-color: #f5f5f5;
     font-family: sans-serif;
-    display: block;
+    display: block; /* Важно: убран flex с body */
     padding-top: 160px !important;
     margin: 0;
     transition: background-color 0.3s ease;
 }
 
+/* Сообщение о регистрации (в 2 раза меньше) */
 .auth-status {
     font-size: 8px !important; 
-    color: #888;
+    color: red;
     text-align: center;
     width: 100%;
     display: block;
-    margin-bottom: 5px;
 }
 
-/* --- ХИДЕР --- */
+/* --- ХИДЕР (ИСПРАВЛЕННЫЙ) --- */
 .top-nav {
     position: fixed !important;
-    top: 0; left: 0; width: 100%;
-    background-color: #ffffff !important;
-    border-bottom: 1px solid #e0e0e0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff; /* Явный фон */
+    border-bottom: 1px solid #e0e0e0; /* Рамка снизу */
     z-index: 9999;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     padding: 10px 0;
@@ -43,8 +49,8 @@ body {
 .logo {
     font-size: 1.4rem;
     font-weight: bold;
-    color: #1a1a1a !important;
-    text-decoration: none !important;
+    color: #1a1a1a;
+    text-decoration: none;
 }
 
 .nav-links {
@@ -55,13 +61,12 @@ body {
     justify-content: center;
 }
 
-/* Кнопки навигации */
-.nav-btn, .nav-links a {
+.nav-links a, .nav-btn {
     text-decoration: none !important;
-    color: #1a1a1a !important;
+    color: #1a1a1a;
     font-weight: 600;
     padding: 6px 14px;
-    border: 2px solid #1a1a1a !important;
+    border: 2px solid #1a1a1a;
     border-radius: 4px;
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -69,24 +74,44 @@ body {
 }
 
 .nav-links a:hover {
-    background-color: #1a1a1a !important;
+    background-color: #1a1a1a;
     color: #fff !important;
 }
 
-/* --- ОСНОВНЫЕ КНОПКИ САЙТА (Скачать, Подписать и т.д.) --- */
-.btn-download {
-    background-color: #1a1a1a !important;
-    color: #fff !important;
-    border: 1px solid #1a1a1a !important;
+/* --- КОНТЕЙНЕРЫ И КАРТОЧКИ (ОРИГИНАЛ) --- */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.btn-view {
-    background-color: #f0f0f0 !important;
-    color: #333 !important;
-    border: 1px solid #ddd !important;
+.title { font-size: 2.8rem; font-weight: 700; color: #1a1a1a; }
+.description { color: #666; line-height: 1.5; }
+
+.file-card, .sign-block, .review-card, .review-form-block {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    text-align: left;
+    margin-bottom: 15px;
 }
 
-/* --- ТЕМНАЯ ТЕМА --- */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+/* --- ТЕМНАЯ ТЕМА (ПОЛНАЯ КОРРЕКЦИЯ) --- */
 body.dark {
     background-color: #121212 !important;
     color: #ffffff !important;
@@ -97,7 +122,8 @@ body.dark .top-nav {
     border-bottom: 1px solid #333 !important;
 }
 
-body.dark .logo, body.dark .nav-links a, body.dark .nav-btn {
+/* Кнопки в темной теме */
+body.dark .nav-links a, body.dark .nav-btn, body.dark .logo {
     color: #ffffff !important;
     border-color: #ffffff !important;
 }
@@ -107,46 +133,48 @@ body.dark .nav-links a:hover {
     color: #1a1a1a !important;
 }
 
-/* Перекраска основных кнопок в темной теме */
-body.dark .btn-download {
-    background-color: #eee !important;
-    color: #111 !important;
-    border-color: #eee !important;
-}
-
-body.dark .btn-view {
-    background-color: #333 !important;
-    color: #eee !important;
-    border-color: #444 !important;
-}
-
-/* Карточки и инпуты */
-body.dark .file-card, body.dark .sign-block, body.dark .review-card, body.dark .review-form-block {
+/* Карточки в темной теме */
+body.dark .file-card, 
+body.dark .sign-block, 
+body.dark .review-card, 
+body.dark .review-form-block {
     background-color: #1e1e1e !important;
     border-color: #333 !important;
 }
 
+body.dark .title, body.dark .file-name, body.dark .review-name {
+    color: #ffffff !important;
+}
+
+/* Поля ввода и ПЛЕЙСХОЛДЕРЫ в темной теме */
 body.dark input, body.dark textarea {
     background-color: #2d2d2d !important;
     border-color: #444 !important;
     color: #ffffff !important;
 }
 
-body.dark input::placeholder, body.dark textarea::placeholder {
-    color: rgba(255, 255, 255, 0.5) !important;
+body.dark input::placeholder, 
+body.dark textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* Прогресс-бар */
-body.dark .progress-bar-bg { background-color: #333 !important; }
-body.dark .progress-bar-fill { background-color: #fff !important; }
+/* Для старых браузеров */
+body.dark input::-webkit-input-placeholder { color: rgba(255,255,255,0.6); }
+body.dark input::-moz-placeholder { color: rgba(255,255,255,0.6); }
 
-/* Кнопка смены темы */
+/* --- ПРОГРЕСС-БАР --- */
+.progress-bar-bg { width: 100%; height: 8px; background-color: #eee; border-radius: 4px; }
+.progress-bar-fill { height: 100%; background-color: #1a1a1a; border-radius: 4px; }
+body.dark .progress-bar-bg { background-color: #333; }
+body.dark .progress-bar-fill { background-color: #fff; }
+
 .theme-toggle {
     background: none;
     border: 1px solid #ddd;
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.2rem;
-    width: 35px; height: 35px;
+    width: 35px;
+    height: 35px;
 }
-body.dark .theme-toggle { border-color: #555; color: #fff; }
+body.dark .theme-toggle { border-color: #555; }
