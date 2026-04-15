@@ -146,19 +146,6 @@ def donate(request):
     return render(request, 'donate.html')
 
 @login_required
-def moderation(request):
-    pending = Question.objects.filter(status='pending').order_by('date')
-    my_questions = Question.objects.filter(status='approved').order_by('-date')
-    
-    # Создаем переменную context перед тем, как использовать её в render
-    context = {
-        'questions': pending,
-        'my_questions': my_questions
-    }
-    
-    return render(request, 'moderation.html', context)
-
-@login_required
 def moderation_rev(request):
     pending_reviews = Review.objects.filter(status='pending').order_by('-date')
     
