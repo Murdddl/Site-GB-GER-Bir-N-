@@ -37,7 +37,7 @@
 </script>
 
 <body>
-
+    <span style="color: red;">User: {{ user.username }} | Auth: {{ user.is_authenticated }}</span>
     <nav class="top-nav">
         <div class="nav-wrapper">
             <a href="{% url 'index' %}" class="logo">Schul-Petition</a>
