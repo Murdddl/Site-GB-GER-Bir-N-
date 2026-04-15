@@ -464,3 +464,6 @@ body.dark .file-display-name,
 body.dark [class*="file"] {
     color: #ffffff;
 }
+body.dark .review-form-title {
+    color: #ffffff !important
+}
