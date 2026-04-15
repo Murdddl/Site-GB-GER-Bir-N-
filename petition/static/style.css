@@ -375,3 +375,21 @@ body.dark .progress-header {
         border: 1px solid #333;
     }
 }
+
+/* Применяем стили только когда у body есть класс dark */
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+    color: #ffffff;
+    opacity: 1; /* В некоторых браузерах прозрачность по умолчанию занижена */
+}
+
+/* Для поддержки старых версий браузеров (опционально) */
+body.dark input:-ms-input-placeholder,
+body.dark textarea:-ms-input-placeholder {
+    color: #ffffff;
+}
+
+body.dark input::-ms-input-placeholder,
+body.dark textarea::-ms-input-placeholder {
+    color: #ffffff;
+}
