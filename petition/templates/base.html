@@ -42,13 +42,13 @@
         <div class="nav-wrapper">
             <a href="{% url 'index' %}" class="logo">Schul-Petition</a>
             <div class="nav-links">
-    <a href="{% url 'index' %}">Hauptseite</a>
-    <a href="{% url 'faq' %}">FAQ</a>
-    <a href="{% url 'reviews' %}">Reviews</a>
+    <a href="{% url 'index' %}" class="nav-btn">Hauptseite</a>
+    <a href="{% url 'faq' %}" class="nav-btn">FAQ</a>
+    <a href="{% url 'reviews' %}" class="nav-btn">Reviews</a>
 
     {% if user.is_authenticated %}
-        <a href="{% url 'moderation' %}" style="color: #ffc107; font-weight: bold;">Moderation</a>
-        <a href="{% url 'moderation_rev' %}" style="color: #ffc107;">Reviews Mod</a>
+        <a href="{% url 'moderation' %}" style="color: #ffc107; font-weight: bold;" class="nav-btn">Moderation</a>
+        <a href="{% url 'moderation_rev' %}" style="color: #ffc107;" class="nav-btn">Reviews Mod</a>
             {% if request.resolver_match.url_name != 'index' %}
         <a href="{% url 'index' %}" class="btn btn-view">← Zurück</a>
             {% endif %}
