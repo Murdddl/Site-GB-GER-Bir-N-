@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db.models import Q # Для сложного поиска
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 
 def index(request):
     ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
@@ -118,4 +120,41 @@ def faq(request):
     
     return render(request, 'faq.html', {'questions': questions, 'query': query})
 
-# ... остальные функции (moderation, delete, donate) остаются без изменений
+@login_required
+def moderation(request):
+    if request.method == 'POST' and 'new_question' in request.POST:
+        question = request.POST.get('question')
+        answer = request.POST.get('answer')
+        if question and answer:
+            Question.objects.create(
+                question=question,
+                answer=answer,
+                status='approved'
+            )
+            return redirect('moderation')
+
+    pending = Question.objects.filter(status='pending').order_by('date')
+    my_questions = Question.objects.filter(status='approved').order_by('-date')
+    return render(request, 'moderation.html', {
+        'questions': pending,
+        'my_questions': my_questions
+    })
+
+@login_required
+def delete_question(request, question_id):
+    if request.method == 'POST':
+        Question.objects.filter(id=question_id).delete()
+    return redirect('moderation')
+
+@login_required
+def answer_question(request, question_id):
+    if request.method == 'POST':
+        # Используем get_object_or_404 для безопасности
+        q = get_object_or_404(Question, id=question_id)
+        q.answer = request.POST.get('answer', '')
+        q.status = request.POST.get('action', 'pending')
+        q.save()
+    return redirect('moderation')
+
+def donate(request):
+    return render(request, 'donate.html')
