@@ -137,7 +137,7 @@ body {
     border-radius: 4px;
     font-size: 0.8rem;
     text-transform: uppercase;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
 .nav-links a:hover {
@@ -147,10 +147,6 @@ body {
 
 .nav-admin {
     background-color: #ff6000e3;
-}
-
-.nav-theme:hover {
-    background-color: #adadad;
 }
 
 /* --- ТЕМНАЯ ТЕМА (ПОЛНАЯ КОРРЕКЦИЯ) --- */
@@ -218,5 +214,11 @@ body.dark .progress-bar-fill { background-color: #fff; }
     font-size: 1.2rem;
     width: 35px;
     height: 35px;
+    transition: background-color 0.3s ease;
 }
+
+.theme-toggle:hover {
+    background-color: #adadad;
+}
+
 body.dark .theme-toggle { border-color: #555; }
