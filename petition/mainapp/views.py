@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q # Для сложного поиска
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
@@ -144,3 +145,8 @@ def answer_question(request, question_id):
 
 def donate(request):
     return render(request, 'donate.html')
+
+@login_required # Этот "декоратор" выкинет любого анонима на страницу логина
+def moderation(request):
+    # Ваш код отображения вопросов для одобрения
+    return render(request, 'moderation.html', context)
