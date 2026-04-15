@@ -22,10 +22,10 @@ def index(request):
                     signed=True,
                     ip_address=ip
                 )
-                return redirect('index')
-    else:
-        form = SignatureForm()
 
+            else:
+                form = SignatureForm()
+                         
     count = Signature.objects.count()
     already_signed = Signature.objects.filter(ip_address=ip).exists()
 
@@ -38,11 +38,15 @@ def index(request):
     else:
         file_size = "—"
 
+    goal = 1000
+    percent = min(round((count / goal) * 100), 100)
+    
     return render(request, 'index.html', {
         'form': form,
         'count': count,
         'file_size': file_size,
-        'already_signed': already_signed
+        'already_signed': already_signed,
+        'percent': percent,
     })
 
 def reviews(request):

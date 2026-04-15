@@ -40,6 +40,16 @@
         um die Aufmerksamkeit von der Kreisverwaltung Birkenfeld zu gewinnen. 
         Jede Unterschrift wird gezählt und leistet einen großen Beitrag.
     </p>
+        
+    <div class="progress-block">
+        <div class="progress-header">
+            <span class="progress-label">{{ count }} von 1000 Unterschriften</span>
+            <span class="progress-percent">{{ percent }}%</span>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: {{ percent }}%"></div>
+        </div>
+    </div>
 
     <p class="sign-count">Anzahl der Unterschriften: {{ count }}</p>
             {% if already_signed %}
