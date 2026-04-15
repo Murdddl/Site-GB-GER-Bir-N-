@@ -302,7 +302,7 @@ body.dark .nav-links a:hover {
     border: none !important;
     font-size: 1.4rem;
     cursor: pointer;
-    padding: 0 10px !important;
+    padding: 0 !important;
     margin-left: 10px;
 }
 
