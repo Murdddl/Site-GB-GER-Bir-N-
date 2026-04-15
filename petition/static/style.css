@@ -145,6 +145,10 @@ body {
     color: #fff !important;
 }
 
+.nav-admin {
+    background-color: #ff6000e3;
+}
+
 /* --- ТЕМНАЯ ТЕМА (ПОЛНАЯ КОРРЕКЦИЯ) --- */
 body.dark {
     background-color: #121212 !important;
