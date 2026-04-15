@@ -1,33 +1,45 @@
 {% extends 'base.html' %}
 
-{% block title %}Hauptseite{% endblock %}
+{% block title %}Alle Reviews{% endblock %}
 
 {% block content %}
+<main class="container">
+    <h1 class="title">Alle Reviews</h1>
 
-    <main class="container">
-
-        <h1 class="title">Alle Reviews</h1>
-
-        <div class="reviews-list">
-            {% for review in reviews %}
-            <div class="review-card">
-                <div class="review-header">
-                    <span class="review-name">{{ review.name }}</span>
-                    <span class="review-date">{{ review.date|date:"d.m.Y H:i" }}</span>
-                </div>
-                <p class="review-text">{{ review.text }}</p>
+    <div class="reviews-list">
+        {% for review in page_obj %}
+        <div class="review-card">
+            <div class="review-header">
+                <span class="review-name">{{ review.name }}</span>
+                <span class="review-date">{{ review.date|date:"d.m.Y H:i" }}</span>
             </div>
-            {% empty %}
-            <p class="no-reviews">Es gibt bisher keine Reviews</p>
-            {% endfor %}
+            <p class="review-text">{{ review.text }}</p>
         </div>
+        {% empty %}
+        <p class="no-reviews">Es gibt bisher keine Reviews</p>
+        {% endfor %}
+    </div>
 
-        <div class="reviews-link">
-            <a href="{% url 'reviews' %}" class="btn btn-download">← Zurück</a>
-        </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-view">&laquo; Anfang</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-view">Zurück</a>
+            {% endif %}
 
-    </main>
+            <span class="current">
+                Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }}
+            </span>
 
-<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="murdddl" data-description="Support me on Buy me a coffee!" data-message="" data-color="#1a1a1a" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-view">Weiter</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-view">Ende &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 
+    <div class="reviews-link">
+        <a href="{% url 'reviews' %}" class="btn btn-download">← Zurück</a>
+    </div>
+</main>
 {% endblock %}

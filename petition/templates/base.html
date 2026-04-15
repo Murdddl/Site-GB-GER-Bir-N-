@@ -29,13 +29,16 @@
 
 <body>
 
-    <nav class="navbar">
-        <div class="nav-links">
-            <a href="{% url 'index' %}" class="nav-link">Hauptseite</a>
-            <a href="{% url 'faq' %}" class="nav-link">FAQ</a>
-            <a href="{% url 'reviews' %}" class="nav-link">Bewertungen</a>
+    <nav class="top-nav">
+        <div class="container nav-wrapper">
+            <a href="{% url 'index' %}" class="logo">Schul-Petition</a>
+            <div class="nav-links">
+                <a href="{% url 'index' %}">Главная</a>
+                <a href="{% url 'faq' %}">FAQ</a>
+                <a href="{% url 'reviews' %}">Отзывы</a>
+                <a href="{% url 'donate' %}">Поддержать</a>
+            </div>
         </div>
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
     </nav>
 
     <main class="container">
@@ -43,6 +46,12 @@
     </main>
 
     <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="murdddl" data-description="Support me on Buy me a coffee!" data-message="" data-color="#1a1a1a" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+    AOS.init({
+        duration: 800, // Длительность анимации
+        once: true     // Анимация срабатывает один раз при скролле
+    });
+</script>
 </body>
 </html>
