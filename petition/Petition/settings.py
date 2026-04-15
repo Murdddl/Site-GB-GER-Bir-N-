@@ -134,5 +134,5 @@ LOGIN_REDIRECT_URL = '/moderation/'
 
 # Настройки почты (для теста в консоли)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'webmaster@your-school-site.ru'
-ADMIN_EMAIL = 'your-admin-email@mail.ru' # Куда будут падать уведомления
+DEFAULT_FROM_EMAIL = 'noreply@test.de'
+ADMIN_EMAIL = 'murdddl@gmail.com' # Куда будут падать уведомления
