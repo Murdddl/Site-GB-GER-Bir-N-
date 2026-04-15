@@ -1,20 +1,15 @@
 from django.shortcuts import render, redirect
-from .models import Signature
+from .models import Signature, Review, Question
 from .forms import SignatureForm
-from .models import Signature, Review
 import os
 from django.conf import settings
-from .models import Signature, Review, Question
 from django.contrib.auth.decorators import login_required
 
 def index(request):
-    already_signed = False
     ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
     
     if request.method == 'POST':
-        if Signature.objects.filter(ip_address=ip).exists():
-            already_signed = True
-        else:
+        if not Signature.objects.filter(ip_address=ip).exists():
             form = SignatureForm(request.POST)
             if form.is_valid():
                 Signature.objects.create(
@@ -22,14 +17,15 @@ def index(request):
                     signed=True,
                     ip_address=ip
                 )
+                return redirect('index')
+        else:
+            form = SignatureForm()
+    else:
+        form = SignatureForm()
 
-            else:
-                form = SignatureForm()
-                         
     count = Signature.objects.count()
     already_signed = Signature.objects.filter(ip_address=ip).exists()
 
-    # размер файла
     file_path = os.path.join(settings.MEDIA_ROOT, 'Appell.pdf')
     if os.path.exists(file_path):
         size_bytes = os.path.getsize(file_path)
@@ -40,7 +36,7 @@ def index(request):
 
     goal = 1000
     percent = min(round((count / goal) * 100), 100)
-    
+
     return render(request, 'index.html', {
         'form': form,
         'count': count,
@@ -48,9 +44,6 @@ def index(request):
         'already_signed': already_signed,
         'percent': percent,
     })
-
-def reviews(request):
-    return render(request, 'reviews.html')
 
 def reviews(request):
     if request.method == 'POST':
