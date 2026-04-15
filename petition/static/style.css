@@ -1,23 +1,22 @@
-/* Глобальные сбросы */
+/* Глобальные настройки */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Базовые настройки страницы */
+/* 1. Базовые настройки страницы */
 body {
     min-height: 100vh;
     background-color: #f5f5f5;
     font-family: sans-serif;
-    color: #1a1a1a;
-    line-height: 1.6;
-    /* Важно: удален flex, чтобы контент не центрировался по вертикали */
-    display: block; 
+    display: block; /* Исправлено: убран flex, чтобы контент не центрировался вертикально */
     padding-top: 160px !important; /* Отступ под фиксированный хидер */
+    margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Навигационная панель */
+/* 2. Навигационная панель (Хидер) */
 .top-nav {
     position: fixed !important;
     top: 0;
@@ -64,13 +63,13 @@ body {
     color: #ffffff !important;
 }
 
-/* Выделение кнопок модерации */
+/* Специальный стиль для кнопок модерации */
 .nav-links a[href*="moderation"] {
     border-color: #ffc107;
     color: #ffc107;
 }
 
-/* Основной контейнер */
+/* 3. Основной контейнер */
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -84,10 +83,11 @@ body {
 .title {
     font-size: 2.5rem;
     font-weight: 700;
+    color: #1a1a1a;
     margin-bottom: 10px;
 }
 
-/* Карточки и блоки */
+/* Карточки контента */
 .file-card, .sign-block, .review-card, .review-form-block {
     width: 100%;
     padding: 20px;
@@ -97,14 +97,14 @@ body {
     text-align: left;
 }
 
-/* Темная тема (объединенная) */
+/* 4. Темная тема (Объединенная и очищенная) */
 body.dark {
-    background-color: #121212;
-    color: #f5f5f5;
+    background-color: #121212 !important;
+    color: #f5f5f5 !important;
 }
 
 body.dark .top-nav {
-    background-color: #1a1a1a;
+    background-color: #1a1a1a !important;
     border-bottom: 1px solid #333;
 }
 
@@ -112,46 +112,30 @@ body.dark .file-card,
 body.dark .sign-block, 
 body.dark .review-card, 
 body.dark .review-form-block {
-    background-color: #1e1e1e;
-    border-color: #333;
+    background-color: #1e1e1e !important;
+    border-color: #333 !important;
 }
 
-body.dark .nav-links a, body.dark .logo, body.dark .title {
+body.dark .nav-links a, body.dark .logo, body.dark .title, body.dark .review-name {
     color: #ffffff !important;
     border-color: #ffffff;
 }
 
-body.dark .nav-links a:hover {
-    background-color: #ffffff;
-    color: #1a1a1a !important;
-}
-
 body.dark input, body.dark textarea {
-    background-color: #2d2d2d;
-    border-color: #444;
-    color: #fff;
+    background-color: #2d2d2d !important;
+    border-color: #444 !important;
+    color: #ffffff !important;
 }
 
-/* Кнопки */
-.btn {
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: 500;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
+body.dark input::placeholder, body.dark textarea::placeholder {
+    color: #888 !important;
 }
 
-.btn-view { background-color: #f0f0f0; color: #333; border: none; }
-.btn-download { background-color: #1a1a1a; color: #fff; border: none; }
-
-/* Утилиты */
+/* Кнопка смены темы */
 .theme-toggle {
     background: none;
     border: 1px solid #ccc;
     cursor: pointer;
     font-size: 1.2rem;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    padding: 5px;
 }
