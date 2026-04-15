@@ -48,7 +48,7 @@
 
     {% if user.is_authenticated %}
         <a href="{% url 'moderation' %}" style="color: #ffc107; font-weight: bold;">Moderation</a>
-        <a href="{% url 'moderation_rev' %}">Reviews Mod</a>
+        <a href="{% url 'moderation_rev' %}" style="color: #ffc107;">Reviews Mod</a>
             {% if request.resolver_match.url_name != 'index' %}
         <a href="{% url 'index' %}" class="btn btn-view">← Zurück</a>
             {% endif %}
