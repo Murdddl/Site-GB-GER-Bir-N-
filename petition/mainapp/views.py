@@ -53,7 +53,7 @@ def reviews(request):
         name = request.POST.get('name') or 'Anonym'
         text = request.POST.get('text')
         if text:
-            Review.objects.create(name=name, text=text)
+            Review.objects.create(name=name, text=text, status='pending')
             
             # 1. Email уведомление админу о новом отзыве
             send_mail(
