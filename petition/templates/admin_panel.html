@@ -23,7 +23,6 @@
     <p>{{ r.name }}: {{ r.text }} ({{ r.status }})</p>
 {% endfor %}
 
-:::writing{variant="standard" id="admin02"}
 {% for r in reviews %}
     <p>
         {{ r.name }}: {{ r.text }} ({{ r.status }})
@@ -31,7 +30,6 @@
         <a href="{% url 'delete_review' r.id %}">❌</a>
     </p>
 {% endfor %}
-:::
 
 <h2>Fragen</h2>
 {% for q in questions %}
