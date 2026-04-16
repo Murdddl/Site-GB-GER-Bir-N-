@@ -8,7 +8,11 @@
 <body>
 
 <div class="admin-container">
-
+<div class="file-actions">
+            <a href="{% url 'export_csv' 'signatures' %}" class="btn btn-download">Unterschriften ↓</a>
+            <a href="{% url 'export_csv' 'reviews' %}" class="btn btn-download">Reviews ↓</a>
+            <a href="{% url 'export_csv' 'questions' %}" class="btn btn-download">Fragen ↓</a>
+        </div>
     <!-- Sidebar -->
     <aside class="admin-sidebar">
         <h2>⚙️ Admin</h2>
@@ -18,11 +22,6 @@
             <a href="#">Reviews</a>
             <a href="#">Questions</a>
         </nav>
-        <div class="file-actions">
-            <a href="{% url 'export_csv' 'signatures' %}" class="btn btn-download">Unterschriften ↓</a>
-            <a href="{% url 'export_csv' 'reviews' %}" class="btn btn-download">Reviews ↓</a>
-            <a href="{% url 'export_csv' 'questions' %}" class="btn btn-download">Fragen ↓</a>
-        </div>
     </aside>
 
     <!-- Main -->
