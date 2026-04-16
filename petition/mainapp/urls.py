@@ -14,4 +14,5 @@ urlpatterns = [
     path('moderation/delete/<int:question_id>/', views.delete_question, name='delete_question'),
     path('donate/', views.donate, name='donate'),
     path('moderation_rev/', views.moderation_rev, name='moderation_rev'),
+    path('logout/', views.index, name='logout'),
 ]
