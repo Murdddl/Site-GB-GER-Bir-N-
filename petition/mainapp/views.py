@@ -200,4 +200,16 @@ def admin_panel(request):
         'questions': questions,
     })
 
+@staff_member_required
+def approve_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    review.status = 'approved'
+    review.save()
+    return redirect('admin_panel')
+
+@staff_member_required
+def delete_review(request, review_id):
+    Review.objects.filter(id=review_id).delete()
+    return redirect('admin_panel')
+
 

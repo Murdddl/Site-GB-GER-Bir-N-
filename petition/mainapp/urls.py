@@ -15,4 +15,6 @@ urlpatterns = [
     path('donate/', views.donate, name='donate'),
     path('moderation_rev/', views.moderation_rev, name='moderation_rev'),
     path('admin-panel/', views.admin_panel, name='admin_panel'),
+    path('admin-panel/review/<int:review_id>/approve/', views.approve_review, name='approve_review'),
+    path('admin-panel/review/<int:review_id>/delete/', views.delete_review, name='delete_review'),
 ]
