@@ -130,6 +130,10 @@ body {
     margin-bottom: 15px;
 }
 
+.file-card {
+    height: auto;
+}
+
 .file-actions {
     float: right;
 }
