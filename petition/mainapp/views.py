@@ -9,6 +9,8 @@ from django.core.paginator import Paginator
 from django.db.models import Q # Для сложного поиска
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
+import csv
+from django.http import HttpResponse
 
 def index(request):
     ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
@@ -212,5 +214,28 @@ def delete_review(request, review_id):
     if request.method == 'POST':
         Review.objects.filter(id=review_id).delete()
     return redirect('admin_panel')
+
+@login_required
+def export_csv(request, model_type):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename="{model_type}.csv"'
+    writer = csv.writer(response)
+
+    if model_type == 'signatures':
+        writer.writerow(['Имя', 'Подписано', 'Дата', 'IP'])
+        for s in Signature.objects.all():
+            writer.writerow([s.name, s.signed, s.date, s.ip_address])
+
+    elif model_type == 'reviews':
+        writer.writerow(['Имя', 'Отзыв', 'Дата'])
+        for r in Review.objects.all():
+            writer.writerow([r.name, r.text, r.date])
+
+    elif model_type == 'questions':
+        writer.writerow(['Вопрос', 'Ответ', 'Статус', 'Дата'])
+        for q in Question.objects.all():
+            writer.writerow([q.question, q.answer, q.status, q.date])
+
+    return response
 
 
