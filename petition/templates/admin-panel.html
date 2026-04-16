@@ -1,0 +1,37 @@
+:::writing{variant="standard" id="admin01"}
+
+{% extends 'base.html' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<h1>Admin Seite</h1>
+
+<h2>Unterschriften</h2>
+{% for s in signatures %}
+    <p>{{ s.name }} | {{ s.ip_address }}</p>
+{% endfor %}
+
+<h2>Reviews</h2>
+{% for r in reviews %}
+    <p>{{ r.name }}: {{ r.text }} ({{ r.status }})</p>
+{% endfor %}
+
+<h2>Fragen</h2>
+{% for q in questions %}
+    <p>{{ q.question }} ({{ q.status }})</p>
+{% endfor %}
+
+</body>
+</html>
+
+{% endblock %}
+
+:::

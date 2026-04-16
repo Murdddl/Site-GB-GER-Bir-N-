@@ -187,3 +187,17 @@ def moderation_rev(request):
         return redirect('moderation_rev')
 
     return render(request, 'moderation_rev.html', {'reviews': pending_reviews})
+
+@staff_member_required
+def admin_panel(request):
+    signatures = Signature.objects.order_by('-id')[:10]
+    reviews = Review.objects.order_by('-date')[:10]
+    questions = Question.objects.order_by('-date')[:10]
+
+    return render(request, 'admin_panel.html', {
+        'signatures': signatures,
+        'reviews': reviews,
+        'questions': questions,
+    })
+
+
