@@ -130,6 +130,10 @@ body {
     margin-bottom: 15px;
 }
 
+.file-actions {
+    float: right;
+}
+
 .form-control {
     width: 100%;
     padding: 10px;
