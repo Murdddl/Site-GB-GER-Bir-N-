@@ -13,18 +13,11 @@
     <aside class="admin-sidebar">
         <h2>⚙️ Admin</h2>
         <nav>
-                <a href="#">Dashboard</a>
-                <a href="#">Signatures</a>
-                <a href="#">Reviews</a>
-                <a href="#">Questions</a>
+            <a href="#">Dashboard</a>
+            <a href="#">Signatures</a>
+            <a href="#">Reviews</a>
+            <a href="#">Questions</a>
         </nav>
-        <div class="file-actions">
-                
-                <a href="{% url 'export_csv' 'signatures' %}" class="btn btn-download">Unterschriften ↓</a>
-                <a href="{% url 'export_csv' 'reviews' %}" class="btn btn-download">Reviews ↓</a>
-                <a href="{% url 'export_csv' 'questions' %}" class="btn btn-download">Fragen ↓</a>
-            
-            </div>
     </aside>
 
     <!-- Main -->
@@ -80,7 +73,13 @@
                 {% endfor %}
             </table>
         </div>
-
+            <div class="file-actions">
+                
+                <a href="{% url 'export_csv' 'signatures' %}" class="btn btn-download">Unterschriften ↓</a>
+                <a href="{% url 'export_csv' 'reviews' %}" class="btn btn-download">Reviews ↓</a>
+                <a href="{% url 'export_csv' 'questions' %}" class="btn btn-download">Fragen ↓</a>
+            
+            </div>
     </main>
 
 </div>
