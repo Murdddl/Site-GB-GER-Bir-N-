@@ -177,6 +177,24 @@ body {
 }
 
 /* --- ТЕМНАЯ ТЕМА (ПОЛНАЯ КОРРЕКЦИЯ) --- */
+
+/* --- Темная тема для заголовков v1.0 --- */
+
+body.dark .stat-card {
+    background-color: #1f1f1f !important;
+    border: 1px solid #444 !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark .stat-card h3 {
+    color: #ffffff !important;
+}
+
+body.dark .stat-card p {
+    color: #bdbdbd !important;
+}
+
 body.dark {
     background-color: #121212 !important;
     color: #ffffff !important;
