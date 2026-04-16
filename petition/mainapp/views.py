@@ -8,29 +8,48 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db.models import Q # Для сложного поиска
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.admin.views.decorators import staff_member_required
 
 def index(request):
     ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
-    
+    if ip and ',' in ip:
+        ip = ip.split(',')[0].strip()
+
+    already_signed_cookie = request.COOKIES.get('signed_petition')
+    already_signed_ip = Signature.objects.filter(ip_address=ip).exists()
+
     if request.method == 'POST':
-        if not Signature.objects.filter(ip_address=ip).exists():
-            form = SignatureForm(request.POST)
-            if form.is_valid():
-                Signature.objects.create(
-                    name=form.cleaned_data.get('name') or 'Аноним',
-                    signed=True,
-                    ip_address=ip
-                )
-                return redirect('index')
-        else:
-            form = SignatureForm()
+        if already_signed_cookie or already_signed_ip:
+            return redirect('index')
+
+        form = SignatureForm(request.POST)
+        if form.is_valid():
+            response = redirect('index')
+
+            Signature.objects.create(
+                name=form.cleaned_data.get('name') or 'Аноним',
+                signed=True,
+                ip_address=ip
+            )
+
+            # 🍪 Ставим cookie на год
+            response.set_cookie(
+                'signed_petition',
+                'true',
+                max_age=60 * 60 * 24 * 365,
+                httponly=True,
+                samesite='Lax'
+            )
+
+            return response
     else:
         form = SignatureForm()
 
     count = Signature.objects.count()
-    already_signed = Signature.objects.filter(ip_address=ip).exists()
 
-    # Оптимизация: расчет размера файла
+    already_signed = already_signed_cookie or already_signed_ip
+
+    # Размер файла
     file_path = os.path.join(settings.MEDIA_ROOT, 'Appell.pdf')
     file_size = "—"
     if os.path.exists(file_path):
@@ -106,7 +125,10 @@ def faq(request):
         'already_asked': already_asked
     })
 
-@login_required
+def donate(request):
+    return render(request, 'donate.html')
+
+@staff_member_required
 def moderation(request):
     # Логика добавления нового вопроса (из вашей первой версии)
     if request.method == 'POST' and 'new_question' in request.POST:
@@ -129,13 +151,13 @@ def moderation(request):
         'my_questions': my_questions
     })
 
-@login_required
+@staff_member_required
 def delete_question(request, question_id):
     if request.method == 'POST':
         Question.objects.filter(id=question_id).delete()
     return redirect('moderation')
 
-@login_required
+@staff_member_required
 def answer_question(request, question_id):
     if request.method == 'POST':
         # Используем get_object_or_404 для безопасности
@@ -145,10 +167,7 @@ def answer_question(request, question_id):
         q.save()
     return redirect('moderation')
 
-def donate(request):
-    return render(request, 'donate.html')
-
-@login_required
+@staff_member_required
 def moderation_rev(request):
     pending_reviews = Review.objects.filter(status='pending').order_by('-date')
     

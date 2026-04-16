@@ -71,6 +71,24 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script>
+function markSigned() {
+    localStorage.setItem('signed_petition', 'true');
+}
+</script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('signed_petition')) {
+        const btn = document.getElementById('sign-btn');
+        if (btn) {
+            btn.disabled = true;
+            btn.textContent = "Вы уже подписали";
+        }
+    }
+});
+</script>
+
 <div id="cookie-overlay" class="cookie-overlay">
     <div class="cookie-box">
         <h3>🍪 Cookies</h3>
@@ -114,7 +132,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <a href="{% url 'faq' %}" class="nav-btn">FAQ</a>
                 <a href="{% url 'reviews' %}" class="nav-btn">Reviews</a>
 
-                {% if user.is_authenticated %}
+                {% if user.is_staff %}
                     <a href="{% url 'moderation' %}" class="nav-btn nav-admin" style='font-weight: bold;'>Mod FAQ</a>
                     <a href="{% url 'moderation_rev' %}" class="nav-btn nav-admin" style='font-weight: bold;'>Mod Rev</a>
                     <form action="{% url 'logout' %}" method="post" style="display:inline;">

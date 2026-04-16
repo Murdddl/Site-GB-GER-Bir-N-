@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Модерация отзывов{% endblock %}
+{% block title %}Moderation der Reviews{% endblock %}
 
 {% block content %}
 
@@ -8,14 +8,14 @@
     <h1 class="title">Moderation der Reviews</h1>
     
     <div class="mb-4 text-center">
-        <a href="{% url 'moderation' %}" class="btn btn-view" style="font-size: 0.8rem;">← К вопросам FAQ</a>
+        <a href="{% url 'moderation' %}" class="btn btn-view" style="font-size: 0.8rem;">← FAQ</a>
     </div>
 
     <div class="reviews-list">
         {% for r in reviews %}
         <div class="review-card" data-aos="fade-up">
             <div class="review-header">
-                <span class="review-name">Автор: {{ r.name }}</span>
+                <span class="review-name">Autor: {{ r.name }}</span>
                 <span class="review-date">{{ r.date|date:"d.m.Y H:i" }}</span>
             </div>
             <p class="review-text">{{ r.text }}</p>
@@ -24,13 +24,13 @@
                     {% csrf_token %}
                 <input type="hidden" name="review_id" value="{{ r.id }}"> 
     
-                <button type="submit" name="action" value="approve" class="btn btn-download">Одобрить</button>
-                <button type="submit" name="action" value="delete" class="btn btn-view">Удалить</button>
+                <button type="submit" name="action" value="approve" class="btn btn-download">Genehmigen</button>
+                <button type="submit" name="action" value="delete" class="btn btn-view">Löschen</button>
             </form>
         </div>
         {% empty %}
         <div class="text-center mt-5">
-            <p class="no-reviews">Все отзывы проверены. Чисто! ✨</p>
+            <p class="no-reviews">Alle Reviews sind moderiert! ✨</p>
         </div>
         {% endfor %}
     </div>
