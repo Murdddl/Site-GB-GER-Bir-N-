@@ -8,36 +8,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body>
 
-<h1>Admin Seite</h1>
+<body class="admin-body">
 
-<h2>Unterschriften</h2>
-{% for s in signatures %}
-    <p>{{ s.name }} | {{ s.ip_address }}</p>
-{% endfor %}
+<div class="admin-container">
 
-<h2>Reviews</h2>
-{% for r in reviews %}
-    <p>{{ r.name }}: {{ r.text }} ({{ r.status }})</p>
-{% endfor %}
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <h2>⚙️ Admin</h2>
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Signatures</a>
+            <a href="#">Reviews</a>
+            <a href="#">Questions</a>
+        </nav>
+    </aside>
 
-{% for r in reviews %}
-    <p>
-        {{ r.name }}: {{ r.text }} ({{ r.status }})
-        <a href="{% url 'approve_review' r.id %}">✔</a>
-        <a href="{% url 'delete_review' r.id %}">❌</a>
-    </p>
-{% endfor %}
+    <!-- Main -->
+    <main class="admin-main">
 
-<h2>Fragen</h2>
-{% for q in questions %}
-    <p>{{ q.question }} ({{ q.status }})</p>
-{% endfor %}
+        <h1>Dashboard</h1>
+
+        <!-- Stats -->
+        <div class="admin-stats">
+            <div class="stat-card">
+                <h3>{{ signatures|length }}</h3>
+                <p>Signatures</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ reviews|length }}</h3>
+                <p>Reviews</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ questions|length }}</h3>
+                <p>Questions</p>
+            </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="admin-block">
+            <h2>Reviews</h2>
+
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Text</th>
+                    <th>Status</th>
+                    <th>Handlungen</th>
+                </tr>
+
+                {% for r in reviews %}
+                <tr>
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.text|truncatechars:50 }}</td>
+                    <td>{{ r.status }}</td>
+                    <td>
+                        <form method="post" action="{% url 'approve_review' r.id %}">
+                            {% csrf_token %}
+                            <button class="btn-approve">✔</button>
+                        </form>
+
+                        <form method="post" action="{% url 'delete_review' r.id %}">
+                            {% csrf_token %}
+                            <button class="btn-delete">✖</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </main>
+
+</div>
 
 </body>
 </html>
-
-{% endblock %}
-
