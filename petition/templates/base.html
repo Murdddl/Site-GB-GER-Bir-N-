@@ -36,6 +36,70 @@
     });
 </script>
 
+<script>
+function acceptAll() {
+    localStorage.setItem('cookieConsent', 'all');
+    hideBanner();
+}
+
+function declineAll() {
+    localStorage.setItem('cookieConsent', 'declined');
+    hideBanner();
+}
+
+function saveSettings() {
+    const analytics = document.getElementById('analytics-cookies').checked;
+    localStorage.setItem('cookieConsent', JSON.stringify({
+        analytics: analytics
+    }));
+    hideBanner();
+}
+
+function toggleSettings() {
+    const box = document.getElementById('cookie-settings');
+    box.style.display = box.style.display === 'block' ? 'none' : 'block';
+}
+
+function hideBanner() {
+    document.getElementById('cookie-overlay').style.display = 'none';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('cookieConsent')) {
+        hideBanner();
+    }
+});
+</script>
+
+<div id="cookie-overlay" class="cookie-overlay">
+    <div class="cookie-box">
+        <h3>🍪 Cookies</h3>
+        <p>
+            Мы используем cookies для улучшения работы сайта, аналитики и персонализации.
+            Вы можете принять все или настроить их.
+        </p>
+
+        <div class="cookie-buttons">
+            <button class="btn-accept" onclick="acceptAll()">Принять всё</button>
+            <button class="btn-decline" onclick="declineAll()">Отклонить</button>
+            <button class="btn-settings" onclick="toggleSettings()">Настройки</button>
+        </div>
+
+        <div id="cookie-settings" class="cookie-settings">
+            <label>
+                <input type="checkbox" checked disabled>
+                Обязательные (всегда включены)
+            </label>
+            <label>
+                <input type="checkbox" id="analytics-cookies">
+                Аналитика
+            </label>
+
+            <button class="btn-save" onclick="saveSettings()">Сохранить</button>
+        </div>
+    </div>
+</div>
+
 <body>
     <nav class="top-nav">
         <span class="auth-status">
