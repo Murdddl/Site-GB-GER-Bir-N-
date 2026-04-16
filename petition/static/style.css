@@ -91,7 +91,7 @@ body {
 }
 
 /* --- Основные кнопки сайта (Скачать, Подписать и т.д.) --- */
-.btn-download {
+.btn-download, h1, h2, h3, h4, h5, h6 {
     background-color: #1a1a1a !important;
     color: #fff !important;
     border: 1px solid #1a1a1a !important;
