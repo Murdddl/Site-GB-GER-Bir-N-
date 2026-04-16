@@ -9,7 +9,6 @@ from django.core.paginator import Paginator
 from django.db.models import Q # Для сложного поиска
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
-from services import telegram
 
 def index(request):
     ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
@@ -88,7 +87,6 @@ def reviews(request):
     
     latest_reviews = Review.objects.order_by('-date')[:10]
     total_count = Review.objects.count()
-    telegram.async_send("📌 Новый комментарий")
     return render(request, 'reviews.html', {
         'reviews': latest_reviews,
         'total_count': total_count
@@ -121,7 +119,6 @@ def faq(request):
     # Важно: эта переменная должна быть определена ДО рендера
     already_asked = Question.objects.filter(ip_address=ip, status='pending').exists()
     questions = Question.objects.filter(status='approved').order_by('-date')
-    telegram.async_send("📌 Новый вопрос на модерацию")
     return render(request, 'faq.html', {
         'questions': questions, 
         'already_asked': already_asked
