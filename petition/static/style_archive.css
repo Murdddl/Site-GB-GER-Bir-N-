@@ -1,7 +1,4 @@
-/* ================================================
-   ГЛОБАЛЬНЫЕ СТИЛИ
-   ================================================ */
-
+/* --- ГЛОБАЛЬНЫЕ СТИЛИ (ОРИГИНАЛ) --- */
 * {
     margin: 0;
     padding: 0;
@@ -12,23 +9,31 @@ body {
     min-height: 100vh;
     background-color: #f5f5f5;
     font-family: sans-serif;
-    padding-top: 160px;
+    display: block; /* Важно: убран flex с body */
+    padding-top: 160px !important;
+    margin: 0;
     transition: background-color 0.3s ease;
 }
 
-/* ================================================
-   ХИДЕР
-   ================================================ */
+/* Сообщение о регистрации (в 2 раза меньше) */
+.auth-status {
+    font-size: 8px !important; 
+    color: red;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
 
+/* --- ХИДЕР (ИСПРАВЛЕННЫЙ) --- */
 .top-nav {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff; /* Явный фон */
+    border-bottom: 1px solid #e0e0e0; /* Рамка снизу */
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     padding: 10px 0;
 }
 
@@ -36,7 +41,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
     gap: 8px;
 }
@@ -56,22 +61,14 @@ body {
     justify-content: center;
 }
 
-.nav-links form {
-    display: inline;
-    margin: 0;
-    padding: 0;
+/* Кнопки навигации */
+
+.btn:hover {
+    background-color: #cccccc;
 }
 
-.nav-links button {
-    background: none;
-    cursor: pointer;
-}
-
-/* --- Кнопки навигации --- */
-
-.nav-links a,
-.nav-btn {
-    text-decoration: none;
+.nav-links a, .nav-btn {
+    text-decoration: none !important;
     color: #1a1a1a;
     font-weight: 600;
     padding: 6px 14px;
@@ -79,60 +76,74 @@ body {
     border-radius: 4px;
     font-size: 0.8rem;
     text-transform: uppercase;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
-.nav-links a:hover,
-.nav-btn:hover {
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
-
-.nav-admin {
-    background-color: #ff6000e3;
-}
-
-/* ================================================
-   КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ
-   ================================================ */
-
-.theme-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border: 2px solid #1a1a1a;
-    border-radius: 4px;
-    background: none;
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
+.nav-links form {
+    display: inline;
+    margin: 0;
     padding: 0;
+}
+
+.nav-links a:hover {
+    background-color: #1a1a1a;
+    color: #fff !important;
+}
+
+/* --- Основные кнопки сайта (Скачать, Подписать и т.д.) --- */
+.btn-download {
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+    border: 1px solid #1a1a1a !important;
+    margin: 4px;
     transition: all 0.3s ease;
 }
 
-.theme-toggle:hover {
-    background-color: #adadad;
-    color: #ffffff;
+.btn-download:hover {
+    background-color: #2a2a2a;
+    border-color: #2a2a2a;
 }
 
-/* ================================================
-   СООБЩЕНИЕ О РЕГИСТРАЦИИ
-   ================================================ */
 
-.auth-status {
-    font-size: 8px;
-    color: red;
-    text-align: center;
-    width: 100%;
-    display: block;
+.btn-view {
+    background-color: #f0f0f0 !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+    margin: 4px;
+    transition: all 0.3s ease;
 }
 
-/* ================================================
-   КОНТЕЙНЕРЫ И КАРТОЧКИ
-   ================================================ */
+.btn-view:hover {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+    color: #111;
+}
 
+/* --- Архив --- 
+    .btn-download { 
+    background-color: #1a1a1a !important; 
+    color: #fff !important; 
+    border: 1px solid #1a1a1a !important; 
+    margin: 4px; transition: all 0.3s; 
+    } 
+
+    .btn-download:hover { 
+    background-color: #1f1f1f; 
+    } 
+
+    .btn-view { 
+    background-color: #f0f0f0 !important; 
+    color: #333 !important; 
+    border: 1px solid #ddd !important; 
+    margin: 4px; 
+    transition: all 0.3s; } 
+
+    .btn-view:hover { 
+    background-color: #777; 
+    } 
+   --- Архив --- */
+
+/* --- КОНТЕЙНЕРЫ И КАРТОЧКИ (ОРИГИНАЛ) --- */
 .container {
     display: flex;
     flex-direction: column;
@@ -144,24 +155,13 @@ body {
     padding: 20px;
 }
 
-.title {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: #1a1a1a;
-}
+.title { font-size: 2.8rem; font-weight: 700; color: #1a1a1a; }
+.description { color: #666; line-height: 1.5; }
 
-.description {
-    color: #666;
-    line-height: 1.5;
-}
-
-.file-card,
-.sign-block,
-.review-card,
-.review-form-block {
+.file-card, .sign-block, .review-card, .review-form-block {
     width: 100%;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     margin-bottom: 15px;
@@ -179,7 +179,6 @@ body {
     display: flex;
     gap: 10px;
 }
-
 .form-control {
     width: 100%;
     padding: 10px;
@@ -188,79 +187,174 @@ body {
     margin-top: 5px;
 }
 
-/* ================================================
-   КНОПКИ ДЕЙСТВИЙ
-   ================================================ */
-
-.btn-download {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    border: 1px solid #1a1a1a;
-    margin: 4px;
-    transition: all 0.3s ease;
+/* Кнопки навигации */
+.nav-btn, .nav-links a {
+    text-decoration: none !important;
+    color: #1a1a1a !important;
+    font-weight: 600;
+    padding: 6px 14px;
+    border: 2px solid #1a1a1a !important;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
 }
 
-.btn-download:hover {
-    background-color: #2a2a2a;
-    border-color: #2a2a2a;
+.nav-links a:hover {
+    background-color: #1a1a1a !important;
+    color: #fff !important;
 }
 
-.btn-view {
-    background-color: #f0f0f0;
-    color: #333;
+.nav-links button {
+    background: none;
+    cursor: pointer;
+}
+
+.nav-admin {
+    background-color: #ff6000e3;
+}
+
+/* --- ТЕМНАЯ ТЕМА (ПОЛНАЯ КОРРЕКЦИЯ) --- */
+
+/* --- Темная тема для заголовков v1.0 --- */
+
+body.dark .stat-card {
+    background-color: #1f1f1f !important;
+    border: 1px solid #444 !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark .stat-card h3 {
+    color: #ffffff !important;
+}
+
+body.dark .stat-card p {
+    color: #bdbdbd !important;
+}
+
+body.dark {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+body.dark .top-nav {
+    background-color: #1a1a1a !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+/* Кнопки в темной теме */
+body.dark .nav-links a, body.dark .nav-btn, body.dark .logo {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+body.dark .nav-links a:hover {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+}
+
+/* Карточки в темной теме */
+body.dark .file-card, 
+body.dark .sign-block, 
+body.dark .review-card, 
+body.dark .review-form-block {
+    background-color: #1e1e1e !important;
+    border-color: #333 !important;
+}
+
+body.dark .title, body.dark .file-name, body.dark .review-name {
+    color: #ffffff !important;
+}
+
+/* Поля ввода и ПЛЕЙСХОЛДЕРЫ в темной теме */
+body.dark input, body.dark textarea {
+    background-color: #2d2d2d !important;
+    border-color: #444 !important;
+    color: #ffffff !important;
+}
+
+body.dark input::placeholder, 
+body.dark textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Для старых браузеров */
+body.dark input::-webkit-input-placeholder { color: rgba(255,255,255,0.6); }
+body.dark input::-moz-placeholder { color: rgba(255,255,255,0.6); }
+
+/* --- ПРОГРЕСС-БАР --- */
+.progress-bar-bg { width: 100%; height: 8px; background-color: #eee; border-radius: 4px; }
+.progress-bar-fill { height: 100%; background-color: #1a1a1a; border-radius: 4px; }
+body.dark .progress-bar-bg { background-color: #333; }
+body.dark .progress-bar-fill { background-color: #fff; }
+
+/* --- Button v1.0 --- */
+
+/*.theme-toggle {
+    background: none;
     border: 1px solid #ddd;
-    margin: 4px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 35px;
+    height: 35px;
+    transition: background-color 0.3s ease;
+}*/
+
+/* --- Button v2.0 --- */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 2px solid #1a1a1a;
+    border-radius: 4px;
+
+    background: none;
+    cursor: pointer;
+
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+
     transition: all 0.3s ease;
 }
 
-.btn-view:hover {
-    background-color: #e0e0e0;
-    border-color: #cccccc;
-    color: #111;
+.theme-toggle:hover {
+    background-color: #adadad;
+    color: white;
 }
 
-/* ================================================
-   ПРОГРЕСС-БАР
-   ================================================ */
+body.dark .theme-toggle { border-color: #555; }
 
-.progress-bar-bg {
-    width: 100%;
-    height: 8px;
-    background-color: #eeeeee;
-    border-radius: 4px;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background-color: #1a1a1a;
-    border-radius: 4px;
-}
-
-/* ================================================
-   COOKIE-БАННЕР
-   ================================================ */
-
+/* Overlay затемнение */
 .cookie-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0,0,0,0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 200; /* выше .top-nav */
+    z-index: 9999;
 }
 
+/* Само окно */
 .cookie-box {
-    background: #ffffff;
+    background: #fff;
     color: #1a1a1a;
     padding: 25px;
     border-radius: 12px;
     max-width: 400px;
     width: 90%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     text-align: center;
     animation: fadeIn 0.3s ease;
 }
@@ -274,6 +368,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Кнопки */
 .cookie-buttons {
     display: flex;
     gap: 10px;
@@ -291,11 +386,11 @@ body {
 
 .btn-accept {
     background: #1a1a1a;
-    color: #ffffff;
+    color: white;
 }
 
 .btn-decline {
-    background: #cccccc;
+    background: #ccc;
 }
 
 .btn-settings {
@@ -303,6 +398,7 @@ body {
     border: 1px solid #ddd;
 }
 
+/* Настройки */
 .cookie-settings {
     margin-top: 15px;
     display: none;
@@ -319,23 +415,29 @@ body {
     margin-top: 10px;
     width: 100%;
     background: #1a1a1a;
-    color: #ffffff;
+    color: white;
 }
 
+/* Анимация */
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.95); }
-    to   { opacity: 1; transform: scale(1); }
+    to { opacity: 1; transform: scale(1); }
 }
 
-/* ================================================
-   ADMIN PANEL
-   ================================================ */
+/* ТЕМНАЯ ТЕМА */
+body.dark .cookie-box {
+    background: #1e1e1e;
+    color: white;
+}
+
+/* ================= ADMIN PANEL (LIGHT THEME) ================= */
 
 .admin-container {
     display: flex;
     gap: 20px;
 }
 
+/* Sidebar */
 .admin-sidebar {
     width: 220px;
     background: #ffffff;
@@ -364,10 +466,12 @@ body {
     color: #000;
 }
 
+/* Main */
 .admin-main {
     flex: 1;
 }
 
+/* Stats */
 .admin-stats {
     display: flex;
     gap: 20px;
@@ -388,6 +492,7 @@ body {
     color: #1a1a1a;
 }
 
+/* Blocks */
 .admin-block {
     background: #ffffff;
     border: 1px solid #e0e0e0;
@@ -396,6 +501,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -411,6 +517,7 @@ th {
     color: #777;
 }
 
+/* Buttons */
 button {
     border: none;
     padding: 6px 10px;
@@ -420,9 +527,10 @@ button {
     font-weight: 600;
 }
 
+/* Actions */
 .btn-approve {
     background: #1a1a1a;
-    color: #ffffff;
+    color: #fff;
 }
 
 .btn-approve:hover {
@@ -431,127 +539,40 @@ button {
 
 .btn-delete {
     background: #e53935;
-    color: #ffffff;
+    color: white;
 }
 
 .btn-delete:hover {
     opacity: 0.8;
 }
 
-/* ================================================
-   ТЁМНАЯ ТЕМА
-   ================================================ */
-
-body.dark {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-body.dark .top-nav {
-    background-color: #1a1a1a;
-    border-bottom-color: #333;
-}
-
-body.dark .logo,
-body.dark .nav-links a,
-body.dark .nav-btn {
-    color: #ffffff;
-    border-color: #ffffff;
-}
-
-body.dark .nav-links a:hover,
-body.dark .nav-btn:hover {
-    background-color: #ffffff;
-    color: #1a1a1a;
-}
-
-body.dark .theme-toggle {
-    border-color: #ffffff;
-    color: #ffffff;
-}
-
-body.dark .theme-toggle:hover {
-    background-color: #555;
-}
-
-body.dark .file-card,
-body.dark .sign-block,
-body.dark .review-card,
-body.dark .review-form-block {
-    background-color: #1e1e1e;
-    border-color: #333;
-}
-
-body.dark .title,
-body.dark .file-name,
-body.dark .review-name {
-    color: #ffffff;
-}
-
-body.dark input,
-body.dark textarea {
-    background-color: #2d2d2d;
-    border-color: #444;
-    color: #ffffff;
-}
-
-body.dark input::placeholder,
-body.dark textarea::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-body.dark .progress-bar-bg {
-    background-color: #333;
-}
-
-body.dark .progress-bar-fill {
-    background-color: #ffffff;
-}
-
-body.dark .cookie-box {
-    background: #1e1e1e;
-    color: #ffffff;
-}
-
-body.dark .stat-card {
-    background-color: #1f1f1f;
-    border-color: #444;
-    color: #ffffff;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-}
-
-body.dark .stat-card h3 {
-    color: #ffffff;
-}
-
-body.dark .stat-card p {
-    color: #bdbdbd;
-}
+/* ================= DARK THEME SUPPORT ================= */
 
 body.dark .admin-sidebar {
-    background: #1e1e1e;
-    border-color: #333;
+    background: #1e1e1e !important;
+    border-color: #333 !important;
 }
 
 body.dark .admin-sidebar h2,
 body.dark .admin-sidebar a {
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 body.dark .admin-sidebar a:hover {
-    background: #333;
+    background: #333 !important;
 }
 
+body.dark .stat-card,
 body.dark .admin-block {
-    background: #1e1e1e;
-    border-color: #333;
+    background: #1e1e1e !important;
+    border-color: #333 !important;
 }
 
 body.dark th,
 body.dark td {
-    border-color: #333;
+    border-color: #333 !important;
 }
 
 body.dark th {
-    color: #aaaaaa;
+    color: #aaa !important;
 }
