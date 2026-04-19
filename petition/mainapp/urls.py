@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -18,4 +19,5 @@ urlpatterns = [
     path('admin-panel/review/<int:review_id>/approve/', views.approve_review, name='approve_review'),
     path('admin-panel/review/<int:review_id>/delete/', views.delete_review, name='delete_review'),
     path('export/<str:model_type>/', views.export_csv, name='export_csv'),
+    path('s/i/t/e/m/a/', TemplateView.as_view(template_name='sitemap.xml'))
 ]
