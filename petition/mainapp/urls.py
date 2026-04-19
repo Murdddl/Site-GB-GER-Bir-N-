@@ -18,5 +18,4 @@ urlpatterns = [
     path('admin-panel/review/<int:review_id>/approve/', views.approve_review, name='approve_review'),
     path('admin-panel/review/<int:review_id>/delete/', views.delete_review, name='delete_review'),
     path('export/<str:model_type>/', views.export_csv, name='export_csv'),
-    path('google1234567890abcdef.html', views.google_verification),
 ]
