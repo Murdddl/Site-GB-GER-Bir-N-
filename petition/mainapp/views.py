@@ -238,10 +238,3 @@ def export_csv(request, model_type):
 
     return response
 
-def google_verification(request):
-    return HttpResponse(
-        "google-site-verification: google1234567890abcdef.html",
-        content_type="text/html"
-    )
-
-
