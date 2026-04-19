@@ -284,7 +284,7 @@ body.dark .progress-bar-fill { background-color: #fff; }
     line-height: 1;
     padding: 0;
 
-    transition: background-color 0.3s ease,
+    transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
