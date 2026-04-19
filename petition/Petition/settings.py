@@ -90,7 +90,7 @@ DATABASES = {
         #'PORT': os.getenv('DB_PORT'),
         
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/murdddl/db.sqlite3',
+        'NAME': '/home/Murdddl/db.sqlite3',
     }
 }
 
