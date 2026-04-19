@@ -251,7 +251,9 @@ body.dark input::-moz-placeholder { color: rgba(255,255,255,0.6); }
 body.dark .progress-bar-bg { background-color: #333; }
 body.dark .progress-bar-fill { background-color: #fff; }
 
-.theme-toggle {
+/* --- Button v1.0 --- */
+
+/*.theme-toggle {
     background: none;
     border: 1px solid #ddd;
     border-radius: 50%;
@@ -260,10 +262,32 @@ body.dark .progress-bar-fill { background-color: #fff; }
     width: 35px;
     height: 35px;
     transition: background-color 0.3s ease;
+}*/
+
+/* --- Button v2.0 --- */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 2px solid #1a1a1a;
+    border-radius: 4px;
+
+    background: none;
+    cursor: pointer;
+
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
 }
 
 .theme-toggle:hover {
     background-color: #adadad;
+    color: white;
 }
 
 body.dark .theme-toggle { border-color: #555; }
