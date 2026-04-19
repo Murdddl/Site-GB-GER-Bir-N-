@@ -96,24 +96,52 @@ body {
     color: #fff !important;
     border: 1px solid #1a1a1a !important;
     margin: 4px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 .btn-download:hover {
-    background-color: #1f1f1f;
+    background-color: #2a2a2a;
+    border-color: #2a2a2a;
 }
+
 
 .btn-view {
     background-color: #f0f0f0 !important;
     color: #333 !important;
     border: 1px solid #ddd !important;
     margin: 4px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 .btn-view:hover {
-    background-color: #777;
+    background-color: #e0e0e0;
+    border-color: #ccc;
+    color: #111;
 }
+
+/* --- Архив --- 
+    .btn-download { 
+    background-color: #1a1a1a !important; 
+    color: #fff !important; 
+    border: 1px solid #1a1a1a !important; 
+    margin: 4px; transition: all 0.3s; 
+    } 
+
+    .btn-download:hover { 
+    background-color: #1f1f1f; 
+    } 
+
+    .btn-view { 
+    background-color: #f0f0f0 !important; 
+    color: #333 !important; 
+    border: 1px solid #ddd !important; 
+    margin: 4px; 
+    transition: all 0.3s; } 
+
+    .btn-view:hover { 
+    background-color: #777; 
+    } 
+   --- Архив --- */
 
 /* --- КОНТЕЙНЕРЫ И КАРТОЧКИ (ОРИГИНАЛ) --- */
 .container {
