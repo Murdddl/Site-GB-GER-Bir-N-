@@ -1,15 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from django.views.generic import TemplateView
-from django.http import FileResponse
-from django.conf import settings
-import os
-
-def serve_sitemap(request):
-    # Путь к файлу: корень_проекта / static / sitemap.xml
-    path_to_file = os.path.join(settings.BASE_DIR, 'static', 'sitemap.xml')
-    return FileResponse(open(path_to_file, 'rb'), content_type='application/xml')
+# from django.views.generic import TemplateView, from django.http import FileResponse, from django.conf import settings, import os
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -27,5 +19,4 @@ urlpatterns = [
     path('admin-panel/review/<int:review_id>/approve/', views.approve_review, name='approve_review'),
     path('admin-panel/review/<int:review_id>/delete/', views.delete_review, name='delete_review'),
     path('export/<str:model_type>/', views.export_csv, name='export_csv'),
-    path('sitemap.xml', serve_sitemap)
 ]
