@@ -1,12 +1,4 @@
 from django.db import models
-
-class Signature(models.Model):
-    name = models.CharField(max_length=100, blank=True, default='Anonym')
-    signed = models.BooleanField(default=True)
-    date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
     
 class Review(models.Model):
     name = models.CharField(max_length=100)
@@ -19,7 +11,7 @@ class Review(models.Model):
         return f"{self.name} - {self.status}"
     
 class Signature(models.Model):
-    name = models.CharField(max_length=100, blank=True, default='Аноним')
+    name = models.CharField(max_length=100, blank=True, default='Anonym')
     signed = models.BooleanField(default=True)
     date = models.DateTimeField(auto_now_add=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
