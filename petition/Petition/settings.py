@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +26,8 @@ SECRET_KEY = 'django-insecure-n647!wb#ezm!t36dt11kg3f%4x91kovr7i#c%y9bzrhnofet8y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['Murdddl.pythonanywhere.com']
+ALLOWED_HOSTS = ['Murdddl.pythonanywhere.com',
+                 '127.0.0.1']
 
 
 # Application definition
@@ -80,19 +79,20 @@ WSGI_APPLICATION = 'Petition.wsgi.application'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': os.getenv('DB_NAME'),
+        #'USER': os.getenv('DB_USER'),
+        #'PASSWORD': os.getenv('DB_PASSWORD'),
+        #'HOST': os.getenv('DB_HOST'),
+        #'PORT': os.getenv('DB_PORT'),
+        
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -171,3 +171,5 @@ TELEGRAM_BOT_TOKEN = "8779537957:AAFLUzkcqtFGiTNVHHUODMoz9tQOlknMGsA"
 TELEGRAM_CHAT_ID = "8239586586"
 
 APP_VERSION = "1.0"
+
+print("DB PATH:", BASE_DIR / "db.sqlite3")
