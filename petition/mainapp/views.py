@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
 import csv
 from django.http import HttpResponse
+from datetime import datetime
 
 def index(request):
     ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
@@ -218,7 +219,13 @@ def delete_review(request, review_id):
 @login_required
 def export_csv(request, model_type):
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = f'attachment; filename="{model_type}.csv"'
+
+    version = "v1.0"  # можешь потом вынести в settings
+    date_str = datetime.now().strftime("%Y-%m-%d")
+
+    filename = f"{model_type}_{version}_{date_str}.csv"
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
     writer = csv.writer(response)
 
     if model_type == 'signatures':
