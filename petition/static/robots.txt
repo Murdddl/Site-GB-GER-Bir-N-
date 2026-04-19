@@ -1,2 +1,11 @@
- User-agent: *
-Allow: /
+User-agent: *
+Disallow: /admin/               # Запрещаем индексировать панель администратора
+Disallow: /admin-panel/         # Бан панели
+Disallow: /static/          `   # Обычно статику тоже закрывают от индекса
+Disallow: /moderation/          # Бан мода
+Disallow: /login/               # Бан Логина
+Disallow: /logout/              # Бан Логаута
+Disallow: /moderation_rev/      # Бан мода
+Allow: /                        # Разрешаем всё остальное
+
+Sitemap: https://murdddl.pythonanywhere.com/sitemap.xml
