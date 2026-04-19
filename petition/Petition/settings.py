@@ -88,9 +88,9 @@ DATABASES = {
         #'PASSWORD': os.getenv('DB_PASSWORD'),
         #'HOST': os.getenv('DB_HOST'),
         #'PORT': os.getenv('DB_PORT'),
-        
+
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/Murdddl/db.sqlite3',
+        'NAME': r'C:\dev\db.sqlite3',
     }
 }
 
