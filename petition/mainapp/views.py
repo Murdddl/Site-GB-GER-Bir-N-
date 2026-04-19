@@ -29,7 +29,7 @@ def index(request):
             response = redirect('index')
 
             Signature.objects.create(
-                name=form.cleaned_data.get('name') or 'Аноним',
+                name=form.cleaned_data.get('name') or 'Anonym',
                 signed=True,
                 ip_address=ip
             )
@@ -222,17 +222,17 @@ def export_csv(request, model_type):
     writer = csv.writer(response)
 
     if model_type == 'signatures':
-        writer.writerow(['Имя', 'Подписано', 'Дата', 'IP'])
+        writer.writerow(['Name', 'Unterschrieben', 'Datum', 'IP'])
         for s in Signature.objects.all():
             writer.writerow([s.name, s.signed, s.date, s.ip_address])
 
     elif model_type == 'reviews':
-        writer.writerow(['Имя', 'Отзыв', 'Дата'])
+        writer.writerow(['Name', 'Reviews', 'Datum'])
         for r in Review.objects.all():
             writer.writerow([r.name, r.text, r.date])
 
     elif model_type == 'questions':
-        writer.writerow(['Вопрос', 'Ответ', 'Статус', 'Дата'])
+        writer.writerow(['Frage', 'Antwort', 'Satus', 'Datum'])
         for q in Question.objects.all():
             writer.writerow([q.question, q.answer, q.status, q.date])
 
