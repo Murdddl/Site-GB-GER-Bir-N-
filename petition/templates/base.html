@@ -22,29 +22,26 @@
 
 <script>
     function toggleTheme() {
-        // Переключаем класс dark у body
-        document.body.classList.toggle('dark');
         const isDark = document.body.classList.toggle('dark');
-        
-        // Сохраняем выбор в localStorage
+
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        
-        // Меняем иконку на кнопке
+
         const btn = document.querySelector('.theme-toggle');
         if (btn) {
             btn.textContent = isDark ? '☀️' : '🌙';
         }
     }
 
-    // Применяем тему сразу при загрузке страницы
     window.addEventListener('DOMContentLoaded', () => {
         const theme = localStorage.getItem('theme');
+
+        const btn = document.querySelector('.theme-toggle');
+
         if (theme === 'dark') {
             document.body.classList.add('dark');
-            const btn = document.querySelector('.theme-toggle');
             if (btn) btn.textContent = '☀️';
         }
-    });-
+    });
 </script>
 
 <script>
@@ -169,7 +166,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <a href="{% url 'index' %}" class="nav-btn">← Zurück</a>
                 {% endif %}
 
-                <!--<button class="theme-toggle" onclick="toggleTheme()">🌙</button>-->
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
             </div>
         </div>
     </nav>
