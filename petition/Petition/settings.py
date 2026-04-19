@@ -90,7 +90,7 @@ DATABASES = {
         #'PORT': os.getenv('DB_PORT'),
 
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': r'C:\dev\db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
